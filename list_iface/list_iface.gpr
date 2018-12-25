@@ -1,0 +1,22 @@
+project list_iface is
+	-- supports debug (default) or release modes
+	-- use with -Xmode=release to prepare a release version
+
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj/" & external ("mode", "dbg");
+   for Exec_Dir use ".";
+   for Main use ("test_list_iface.adb");  --   <<<<
+
+   type Mode_Type is ("dbg", "release");         -- all possible values
+   Mode : Mode_Type := external ("mode", "dbg"); -- a typed variable
+
+   package Compiler is
+      case Mode is
+         when "dbg" =>
+            for Switches ("Ada") use ("-g");
+         when "release" =>
+            for Switches ("Ada") use ("-O2");
+      end case;
+   end Compiler;
+
+end list_iface;
