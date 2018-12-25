@@ -1,5 +1,5 @@
 --
--- <one line to give the program's name and a brief idea of what it does.>
+-- a test unit.
 -- 
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,7 +12,8 @@ with Ada.Text_IO, Ada.Integer_Text_IO;
 -- with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 
 with Ada.Containers.Vectors;
-with vectors.dynamic;
+with lists.dynamic;
+with lists.fixed;
 
 procedure Test_list_iface is
     procedure printUsage is
@@ -32,43 +33,64 @@ procedure Test_list_iface is
     use Ada.Text_IO;
 
     type TstType is new Integer;
-    package SV is new Ada.Containers.Vectors(Positive, TstType);
-    package PV is new vectors(Natural, TstType);
-    package PVD is new PV.dynamic;
+    package ACV is new Ada.Containers.Vectors(Positive, TstType);
+    package PL  is new Lists(Natural, TstType);
+    package PLD is new PL.dynamic;
+    package PLF is new PL.fixed;
     
-    v1 : SV.Vector;
-    v2 : PVD.List;
-    use SV, PVD;
+    v : ACV.Vector;
+    ld : PLD.List;
+    lf : PLF.List(5);
+    use ACV, PLD;
 
 begin  -- main
     Put_Line("testing Ada.Containers.Vectors..");
-    Put("assignin vector values .. ");
+    Put("assignin values .. ");
     for i in Positive range 1 .. 5 loop
-        v1 := v1 & TstType(i);
-        v1(i) := TstType(i);
+        v := v & TstType(i);
+        v(i) := TstType(i);
     end loop;
     Put("done;  values: ");
-    for n of v1 loop
+    for n of v loop
         Put(n'Img);
     end loop;
     Put("; now try direct indexing: ");
     for i in Positive range 1 .. 5 loop
-        Put(TstType'Image(v1(i)));
+        Put(TstType'Image(v(i)));
     end loop;
-    New_Line;New_Line;
-    Put_Line("testing vectors.dynamic ..");
-    Put("assignin vector values .. ");
+    New_Line;
+    --
+    New_Line;
+    Put_Line("testing Lists.dynamic ..");
+    Put("assignin values .. ");
     for i in Positive range 1 .. 5 loop
-        v2 := v2 & TstType(i);
-        v2(i) := TstType(i);
+        ld := ld & TstType(i);
+        ld(i) := TstType(i);
     end loop;
     Put("done;  values: ");
-    for n of v2 loop
+    for n of ld loop
         Put(n'Img);
     end loop;
     Put("; now try direct indexing: ");
     for i in Positive range 1 .. 5 loop
-        Put(TstType'Image(v2(i)));
+        Put(TstType'Image(ld(i)));
+    end loop;
+    New_Line;
+    --
+    New_Line;
+    Put_Line("testing Lists.fixed ..");
+    Put("assignin values .. ");
+    for i in Positive range 1 .. 5 loop
+--         lf := lf & TstType(i); -- this one is Vectors specific, needs reimplementing &
+        lf(i) := TstType(i);
+    end loop;
+    Put("done;  values: ");
+    for n of ld loop
+        Put(n'Img);
+    end loop;
+    Put("; now try direct indexing: ");
+    for i in Positive range 1 .. 5 loop
+        Put(TstType'Image(lf(i)));
     end loop;
     New_Line;
 

@@ -7,18 +7,10 @@
 --
 -- Copyright (C) 2018  <copyright holder> <email>
 -- 
--- This program is free software: you can redistribute it and/or modify
--- it under the terms of the GNU General Public License as published by
--- the Free Software Foundation, either version 3 of the License, or
--- (at your option) any later version.
--- 
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 -- GNU General Public License for more details.
--- 
--- You should have received a copy of the GNU General Public License
--- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --
 
 with Ada.Iterator_Interfaces;
@@ -26,7 +18,7 @@ with Ada.Iterator_Interfaces;
 generic
     type Index_Base is range <>; -- pass an "extended" indes_base (e.g. starting from 0 and counting from 1)
     type Element_Type is private;
-package vectors is
+package Lists is
 
     subtype Index_Type is Index_Base range Index_Base'First + 1 .. Index_Base'Last;
     -- mirrors the common subtype definition. Should be the same as defined likewise anywhere else..
@@ -45,8 +37,10 @@ package vectors is
 
     type Constant_Reference_Type (Data : not null access constant Element_Type) is private
         with Implicit_Dereference => Data;
+        
     type Reference_Type (Data : not null access Element_Type) is private
         with Implicit_Dereference => Data;
+        
     function List_Constant_Reference (Container : aliased in List_Interface; Index : in Index_Type) return Constant_Reference_Type is abstract;
     function List_Reference (Container : aliased in out List_Interface; Index : in Index_Type) return Reference_Type is abstract;
 
@@ -81,4 +75,4 @@ private
 --     end record;
 
 
-end vectors;
+end Lists;

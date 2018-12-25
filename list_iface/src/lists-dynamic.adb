@@ -1,24 +1,6 @@
---
--- <one line to give the library's name and an idea of what it does.>
--- Copyright (C) 2018  <copyright holder> <email>
--- 
--- This program is free software: you can redistribute it and/or modify
--- it under the terms of the GNU General Public License as published by
--- the Free Software Foundation, either version 3 of the License, or
--- (at your option) any later version.
--- 
--- This program is distributed in the hope that it will be useful,
--- but WITHOUT ANY WARRANTY; without even the implied warranty of
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--- GNU General Public License for more details.
--- 
--- You should have received a copy of the GNU General Public License
--- along with this program.  If not, see <http://www.gnu.org/licenses/>.
---
-
 with Ada.Text_IO;
 
-package body vectors.dynamic is
+package body Lists.dynamic is
 
     overriding
     function List_Constant_Reference (Container : aliased in List; Index : in Index_Type) return Constant_Reference_Type is
@@ -48,4 +30,4 @@ package body vectors.dynamic is
         return List_Iterator_Interfaces.Reversible_Iterator'Class(ACV.Vector(Container).Iterate);
     end;
     
-end vectors.dynamic;
+end Lists.dynamic;
