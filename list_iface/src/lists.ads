@@ -1,5 +1,5 @@
 --
---  A barebones indexed interface which can be iterated over.
+-- A barebones indexed interface which can be iterated over.
 -- Child packages will either pass through to core (fixed) array or a Vector;
 -- 
 -- The idea is to create an interface that will allow multiple implementations but can be 
@@ -43,8 +43,12 @@ package Lists is
         
     function List_Constant_Reference (Container : aliased in List_Interface; Index : in Index_Type) return Constant_Reference_Type is abstract;
     function List_Reference (Container : aliased in out List_Interface; Index : in Index_Type) return Reference_Type is abstract;
-
+    -- these names have to be different from what is used (in private part) by Ada.Containers.Vectors
+    -- if we are to directly coupe it on top of Vector type,
+    -- otherwise the compiler gets confused..
+    
     function Iterate (Container : List_Interface) return List_Iterator_Interfaces.Reversible_Iterator'Class is abstract;
+    -- this one can (and should) share the name/specs, as it is not part of any aspect..
 
 private
 
@@ -59,20 +63,7 @@ private
     No_Element : constant Cursor := (Null, Index_Base'First);
 
     type Constant_Reference_Type(Data : not null access constant Element_Type) is null record;
---         Control : Reference_Control_Type :=
---             raise Program_Error with "uninitialized reference";
---             --  The RM says, "The default initialization of an object of
---             --  type Constant_Reference_Type or Reference_Type propagates
---             --  Program_Error."
---     end record;
 
     type Reference_Type (Data : not null access Element_Type) is null record;
---         Control : Reference_Control_Type :=
---             raise Program_Error with "uninitialized reference";
---             --  The RM says, "The default initialization of an object of
---             --  type Constant_Reference_Type or Reference_Type propagates
---             --  Program_Error."
---     end record;
-
 
 end Lists;

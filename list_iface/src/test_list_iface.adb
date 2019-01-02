@@ -9,28 +9,13 @@
 
 with Ada.Command_Line, GNAT.Command_Line;
 with Ada.Text_IO, Ada.Integer_Text_IO;
--- with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+use Ada.Text_IO;
 
 with Ada.Containers.Vectors;
 with lists.dynamic;
 with lists.fixed;
 
 procedure Test_list_iface is
-    procedure printUsage is
-        use Ada.Text_IO;
-    begin
-        Put_Line ("test containers.vectors indexing and interfaces with indexing and iterators");
-        New_Line;
-        Put_Line ("usage:");
-        Put_Line ("   " & Ada.Command_Line.Command_Name & " [-h -g -n: -v]  positional");
-        New_Line;
-        Put_Line ("options:");
-        --  only short options for now
-        Put_Line ("-h      print this help");
-        Put_Line ("-g      turn on debug output");
-    end printUsage;
-
-    use Ada.Text_IO;
 
     type TstType is new Integer;
     package ACV is new Ada.Containers.Vectors(Positive, TstType);
@@ -41,6 +26,7 @@ procedure Test_list_iface is
     v : ACV.Vector;
     ld : PLD.List;
     lf : PLF.List(5);
+    lc : PL.List_Interface'Class := PLD.To_Vector(5);
     use ACV, PLD;
 
 begin  -- main
@@ -93,5 +79,21 @@ begin  -- main
         Put(TstType'Image(lf(i)));
     end loop;
     New_Line;
-
+    --
+    New_Line;
+    Put_Line("testing List_Interface'Class ..");
+    Put("assignin values .. ");
+    for i in Positive range 1 .. 5 loop
+--         lc := lc & TstType(i); -- as for .fixed, needs declaration at top level
+        lc(i) := TstType(i);
+    end loop;
+    Put("done;  values: ");
+    for n of lc loop -- this is where gnat gets confused
+        Put(n'Img);
+    end loop;
+    Put("; now try direct indexing: ");
+    for i in Positive range 1 .. 5 loop
+        Put(TstType'Image(lc(i)));
+    end loop;
+    New_Line;
 end Test_List_iface;
