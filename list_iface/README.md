@@ -24,3 +24,10 @@ They will not magically carry over from ACV.Vector..
 NOTE 3: implemented the change described in Note 2 - making Vector in Dynamic.List a record entry
 rather than gluing Vector on top if List_Interface. Complies fine too, but oddly raises the same
 exception and not just at the end, but when looping over specific (dynamic) type too now..
+
+It is possible that Iterator type conversion (from ACV.Vector's iterator to our class)
+is the core issue here. As Iterator is already implemented for fixed, and it is rather trivial,
+only incrementing/decrementing the Cursor index position, and all variants provide direct 
+indexed access, - it may make sense to implement the iterator centrally (in lists.ad?) as 
+complete type, rather than interface. Specific implementations then would only provide indexed access..
+This might make that original approach (gluing Vector over List_Interface) work too..
