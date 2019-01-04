@@ -23,17 +23,17 @@ procedure Test_list_iface is
     package PLD is new PL.dynamic;
     package PLF is new PL.fixed;
     
-    v : ACV.Vector;
-    ld : PLD.List;
+    v  : ACV.Vector := ACV.To_Vector(5);
+    ld : PLD.List   := PLD.To_Vector(5);
     lf : PLF.List(5);
     lc : PL.List_Interface'Class := PLD.To_Vector(5);
-    use ACV, PLD;
+--     use ACV, PLD;
 
 begin  -- main
     Put_Line("testing Ada.Containers.Vectors..");
-    Put("assignin values .. ");
+    Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
-        v := v & TstType(i);
+--         v := v & TstType(i);
         v(i) := TstType(i);
     end loop;
     Put("done;  values: ");
@@ -48,9 +48,9 @@ begin  -- main
     --
     New_Line;
     Put_Line("testing Lists.dynamic ..");
-    Put("assignin values .. ");
+    Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
-        ld := ld & TstType(i);
+--         ld := ld & TstType(i);
         ld(i) := TstType(i);
     end loop;
     Put("done;  values: ");
@@ -65,7 +65,7 @@ begin  -- main
     --
     New_Line;
     Put_Line("testing Lists.fixed ..");
-    Put("assignin values .. ");
+    Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
 --         lf := lf & TstType(i); -- this one is Vectors specific, needs reimplementing &
         lf(i) := TstType(i);

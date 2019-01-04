@@ -16,9 +16,7 @@ with Ada.Containers.Vectors;
 generic
 package Lists.dynamic is
 
-    package ACV is new Ada.Containers.Vectors(Index_Type, Element_Type);
-    
-    type List is new ACV.Vector and List_Interface with private;
+    type List is new List_Interface with private;
 
     overriding
     function List_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type;
@@ -35,8 +33,15 @@ package Lists.dynamic is
     overriding
     function Iterate (Container : in List) return List_Iterator_Interfaces.Reversible_Iterator'Class;
 
+    -- new methods from ACV.Vector pool; should really be part of interface, here is only a demo of tying all together..
+    function To_Vector (Length : Index_Type) return List;
+
 private
 
-    type List is new ACV.Vector and List_Interface with null record;
+    package ACV is new Ada.Containers.Vectors(Index_Type, Element_Type);
+
+    type List is new List_Interface with record
+        vec : ACV.Vector;
+    end record;
     
 end Lists.dynamic;
