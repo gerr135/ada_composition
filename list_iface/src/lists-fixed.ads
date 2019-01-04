@@ -18,10 +18,16 @@ package Lists.fixed is
     -- first index is Index_Type'First
 
     overriding
-    function List_Constant_Reference (Container : aliased in List; Index : in Index_Type) return Constant_Reference_Type;
+    function List_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type;
  
     overriding
-    function List_Reference (Container : aliased in out List; Index : in Index_Type) return Reference_Type;
+    function List_Constant_Reference (Container : aliased in List; Index : Index_Type) return Constant_Reference_Type;
+ 
+    overriding
+    function List_Reference (Container : aliased in out List; Position  : Cursor) return Reference_Type;
+
+    overriding
+    function List_Reference (Container : aliased in out List; Index : Index_Type) return Reference_Type;
 
     overriding
     function Iterate (Container : in List) return List_Iterator_Interfaces.Reversible_Iterator'Class;

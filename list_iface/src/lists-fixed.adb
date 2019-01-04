@@ -3,12 +3,26 @@ with Ada.Text_IO;
 package body Lists.fixed is
 
     overriding
+    function List_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type is
+        CR : Constant_Reference_Type(Container.data(Position.Index)'Access);
+    begin
+        return CR;
+    end;
+ 
+    overriding
     function List_Constant_Reference (Container : aliased in List; Index : in Index_Type) return Constant_Reference_Type is
         CR : Constant_Reference_Type(Container.data(Index)'Access);
     begin
         return CR;
     end;
  
+    overriding
+    function List_Reference (Container : aliased in out List; Position  : Cursor) return Reference_Type is
+        R : Reference_Type(Container.data(Position.Index)'Access);
+    begin
+        return R;
+    end;
+
     overriding
     function List_Reference (Container : aliased in out List; Index : in Index_Type) return Reference_Type is
         R : Reference_Type(Container.data(Index)'Access);

@@ -41,8 +41,11 @@ package Lists is
     type Reference_Type (Data : not null access Element_Type) is private
         with Implicit_Dereference => Data;
         
-    function List_Constant_Reference (Container : aliased in List_Interface; Index : in Index_Type) return Constant_Reference_Type is abstract;
-    function List_Reference (Container : aliased in out List_Interface; Index : in Index_Type) return Reference_Type is abstract;
+    function List_Constant_Reference (Container : aliased in List_Interface; Position  : Cursor) return Constant_Reference_Type is abstract;
+    function List_Constant_Reference (Container : aliased in List_Interface; Index : Index_Type) return Constant_Reference_Type is abstract;
+
+    function List_Reference (Container : aliased in out List_Interface; Position  : Cursor) return Reference_Type is abstract;
+    function List_Reference (Container : aliased in out List_Interface; Index : Index_Type) return Reference_Type is abstract;
     -- these names have to be different from what is used (in private part) by Ada.Containers.Vectors
     -- if we are to directly coupe it on top of Vector type,
     -- otherwise the compiler gets confused..
