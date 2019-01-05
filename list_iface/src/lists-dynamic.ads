@@ -43,5 +43,26 @@ private
     type List is new List_Interface with record
         vec : ACV.Vector;
     end record;
-    
+
+    function Has_Element (L : List; Position : Index_Base) return Boolean;
+
+    -- here we also need to implement Reversible_Iterator interface
+    type Iterator is new Iterator_Interface with record
+        Container : List_Access;
+        Index     : Index_Type'Base;
+    end record;
+
+    overriding
+    function First (Object : Iterator) return Cursor;
+
+    overriding 
+    function Last  (Object : Iterator) return Cursor;
+
+    overriding 
+    function Next (Object   : Iterator; Position : Cursor) return Cursor;
+
+    overriding 
+    function Previous (Object   : Iterator; Position : Cursor) return Cursor;
+
+
 end Lists.dynamic;

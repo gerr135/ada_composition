@@ -35,6 +35,11 @@ package Lists is
     function Has_Element (Position : Cursor) return Boolean;
     package List_Iterator_Interfaces is new Ada.Iterator_Interfaces (Cursor, Has_Element);
 
+    -- we need to redispatch to a proper derived type, so we need to unroll the record
+    -- to make this a primitive op
+    function Has_Element (LI : List_Interface; Position : Index_Base) return Boolean is abstract;
+    -- NOTE: This should really be in provate part, but Ada doers not allow it (citing RM 3.9.3(10))
+
     type Constant_Reference_Type (Data : not null access constant Element_Type) is private
         with Implicit_Dereference => Data;
         
@@ -59,6 +64,10 @@ package Lists is
     type Iterator_Interface is interface and List_Iterator_Interfaces.Reversible_Iterator;
     -- all 4 primitives (First, Last, Next, Prev) would be abstract here anyway, 
     -- so they are implicitly carried over
+    --
+    -- NOTE: in this (trivial) case 3 out of 4 primitives have exactly the same implementation,
+    -- so this could have been made a real type, with a specific method overridden
+    -- But we keep it as is as a demo of a more generic design pattern..
 
 
     function Iterate (Container : List_Interface) return Iterator_Interface'Class is abstract;
@@ -80,8 +89,4 @@ private
 
     type Reference_Type (Data : not null access Element_Type) is null record;
 
---     type Iterator_Interface is abstract new List_Iterator_Interfaces.Reversible_Iterator with null record;
-    -- all 4 primitives (First, Last, Next, Prev) would be abstract here anyway, 
-    -- so they are implicitly carried over
-    
 end Lists;

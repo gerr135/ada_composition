@@ -40,6 +40,8 @@ private
         data : Element_Array(Index_Type'First .. Last);
     end record;
 
+    function Has_Element (L : List; Position : Index_Base) return Boolean;
+
     -- here we also need to implement Reversible_Iterator interface
     type Iterator is new Iterator_Interface with record
         Container : List_Access;

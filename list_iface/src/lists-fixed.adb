@@ -1,5 +1,3 @@
-with Ada.Text_IO;
-
 package body Lists.fixed is
 
     overriding
@@ -35,6 +33,14 @@ package body Lists.fixed is
         It : Iterator := (Container'Unrestricted_Access, Index_Base'First);
     begin
         return It;
+    end;
+
+    function Has_Element (L : List; Position : Index_Base) return Boolean is
+        -- Iterators are unrolled into calling First/Last to assign index
+        -- and then increment/decrement it inside a "while Has_Element(Cursor)" loop
+        -- So we simply check if our index passed outside boundaries..
+    begin
+        return (Position >= L.data'First) and (Position <= L.Last);
     end;
 
 

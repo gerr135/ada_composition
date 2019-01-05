@@ -27,8 +27,8 @@ procedure Test_list_iface is
     ld : PLD.List   := PLD.To_Vector(5);
     lf : PLF.List(5);
     lc : PL.List_Interface'Class := PLD.To_Vector(5);
---     use ACV, PLD;
 
+    
 begin  -- main
     Put_Line("testing Ada.Containers.Vectors..");
     Put("assigning values .. ");
@@ -82,7 +82,7 @@ begin  -- main
     --
     New_Line;
     Put_Line("testing List_Interface'Class ..");
-    Put("assignin values .. ");
+    Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
 --         lc := lc & TstType(i); -- as for .fixed, needs declaration at top level
         lc(i) := TstType(i);
