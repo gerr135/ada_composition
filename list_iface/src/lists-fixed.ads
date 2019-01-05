@@ -30,7 +30,7 @@ package Lists.fixed is
     function List_Reference (Container : aliased in out List; Index : Index_Type) return Reference_Type;
 
     overriding
-    function Iterate (Container : in List) return List_Iterator_Interfaces.Reversible_Iterator'Class;
+    function Iterate (Container : in List) return Iterator_Interface'Class;
 
 private
 
@@ -41,7 +41,7 @@ private
     end record;
 
     -- here we also need to implement Reversible_Iterator interface
-    type Iterator is new List_Iterator_Interfaces.Reversible_Iterator with record
+    type Iterator is new Iterator_Interface with record
         Container : List_Access;
         Index     : Index_Type'Base;
     end record;

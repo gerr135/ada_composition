@@ -49,8 +49,19 @@ package Lists is
     -- these names have to be different from what is used (in private part) by Ada.Containers.Vectors
     -- if we are to directly glue ACV.Vector over this,
     -- otherwise the compiler gets confused..
+
+    ----------------------------------------------
+    -- Iteration
+    --
+    -- we need to define our iterator type in a central way.
+    -- Since implementation details may differe, we essentially get a parallel type hierarchy here..
     
-    function Iterate (Container : List_Interface) return List_Iterator_Interfaces.Reversible_Iterator'Class is abstract;
+    type Iterator_Interface is interface and List_Iterator_Interfaces.Reversible_Iterator;
+    -- all 4 primitives (First, Last, Next, Prev) would be abstract here anyway, 
+    -- so they are implicitly carried over
+
+
+    function Iterate (Container : List_Interface) return Iterator_Interface'Class is abstract;
     -- this one can (and should) share the name/specs, as it is not part of any aspect..
 
 private
@@ -69,4 +80,8 @@ private
 
     type Reference_Type (Data : not null access Element_Type) is null record;
 
+--     type Iterator_Interface is abstract new List_Iterator_Interfaces.Reversible_Iterator with null record;
+    -- all 4 primitives (First, Last, Next, Prev) would be abstract here anyway, 
+    -- so they are implicitly carried over
+    
 end Lists;

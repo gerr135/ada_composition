@@ -31,7 +31,7 @@ package Lists.dynamic is
     function List_Reference (Container : aliased in out List; Index : Index_Type) return Reference_Type;
 
     overriding
-    function Iterate (Container : in List) return List_Iterator_Interfaces.Reversible_Iterator'Class;
+    function Iterate (Container : in List) return Iterator_Interface'Class;
 
     -- new methods from ACV.Vector pool; should really be part of interface, here is only a demo of tying all together..
     function To_Vector (Length : Index_Type) return List;

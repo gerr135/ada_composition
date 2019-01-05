@@ -35,11 +35,11 @@ package body Lists.dynamic is
     end;
 
     overriding
-    function Iterate (Container : in List) return List_Iterator_Interfaces.Reversible_Iterator'Class is
+    function Iterate (Container : in List) return Iterator_Interface'Class is
     begin
         Put_Line("Iterate (LD)");
 --         return List_Iterator_Interfaces.Reversible_Iterator'Class(Container.vec.Iterate);
-        return Container.vec.Iterate;
+        return Iterator_Interface'Class(Container.vec.Iterate);
     end;
 
     function To_Vector (Length : Index_Type) return List is

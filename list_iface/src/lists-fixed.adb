@@ -31,7 +31,7 @@ package body Lists.fixed is
     end;
 
     overriding
-    function Iterate (Container : in List) return List_Iterator_Interfaces.Reversible_Iterator'Class is
+    function Iterate (Container : in List) return Iterator_Interface'Class is
         It : Iterator := (Container'Unrestricted_Access, Index_Base'First);
     begin
         return It;
