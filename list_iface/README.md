@@ -13,7 +13,7 @@ implementation as needed. Only declarations may need to be changed, but most of
 (e.g. the class-wide) code could stay the same..
 
 ## Technicalities
-This is based on the Ada gems articles on iterators, <a href="https://www.adacore.com/gems/gem-127-iterators-in-ada-2012-part-1">@127</a>
+This is based on the Ada gems articles on iterators, <a href="https://www.adacore.com/gems/gem-127-iterators-in-ada-2012-part-1">#127</a>
 and <a href="https://www.adacore.com/gems/gem-128-iterators-in-ada-2012-part-2">#128</a> by AdaCore.
 However this is significantly expanded. First, this demo provides not oonly iteration 
 but also indexing, thus a complete code of A.C.Vectors. Then, and even more essentially,
@@ -30,21 +30,20 @@ with 1 method overridden. However the whole hierarchy is provided here in order 
 an easily tunable pattern.
 
 The code layout follows the type inheritance tree:
-- lists:          contains interface at the root of type hierarchy.
-                  This module provides common interface containing essential primitives 
-                  to be used in universal, data-layout independent way.
+- lists
+     contains interface at the root of type hierarchy. This module provides common interface containing essential primitives to be used in universal, data-layout independent way.
 
-- lists.fixed     an array-based implementation.
-                  Data is stored in a plain Ada array, parametrized by type discriminant.
-                  Storage size is fixed at declaration, but no further allocation is needed
-                  (or can be done), just like with regular arrays.
+- lists.fixed     
+     an array-based implementation. Data is stored in a plain Ada array, parametrized by type discriminant. Storage size is fixed at declaration, but no further allocation is needed (or can be done), just like with regular arrays.
 
-- lists.dynamic   ACV.Vector as a record entry implementation.
-                  Data is stored in ACV.Vector as record entry. Can grow ans shrink, etc. 
-                  This is a classical composition layout. Simple to understand and write 
-                  glue code for methods, but all methods should be explicitly implemented.
+- lists.dynamic   
+ACV.Vector as a record entry implementation.
+Data is stored in ACV.Vector as record entry. Can grow and shrink, etc. 
+This is a classical composition layout. Simple to understand and write 
+glue code for methods, but all methods should be explicitly implemented.
 
-- lists.vectors   ACV.Vector overlaid right over the interface.
+- lists.vectors   
+                  ACV.Vector overlaid right over the interface.
                   This composition requires more care to properly connect the pieces, but
                   makes ACV.Vector methods "magically appear" directly callable, with minimum
                   of glue code. Only explicitly declared methods need to be implemented,
