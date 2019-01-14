@@ -30,25 +30,28 @@ with 1 method overridden. However the whole hierarchy is provided here in order 
 an easily tunable pattern.
 
 The code layout follows the type inheritance tree:
-- lists
-     contains interface at the root of type hierarchy. This module provides common interface containing essential primitives to be used in universal, data-layout independent way.
+- lists     
+  contains interface at the root of type hierarchy. 
+  This module provides common interface containing essential primitives to be used in universal, 
+  data-layout independent way.
 
 - lists.fixed     
-     an array-based implementation. Data is stored in a plain Ada array, parametrized by type discriminant. Storage size is fixed at declaration, but no further allocation is needed (or can be done), just like with regular arrays.
+  an array-based implementation. Data is stored in a plain Ada array, parametrized by type discriminant. 
+  Storage size is fixed at declaration, but no further allocation is needed (or can be done), 
+  just like with regular arrays.
 
 - lists.dynamic   
-ACV.Vector as a record entry implementation.
-Data is stored in ACV.Vector as record entry. Can grow and shrink, etc. 
-This is a classical composition layout. Simple to understand and write 
-glue code for methods, but all methods should be explicitly implemented.
+  ACV.Vector as a record entry implementation.
+  Data is stored in ACV.Vector as record entry. Can grow and shrink, etc. 
+  This is a classical composition layout. Simple to understand and write 
+  glue code for methods, but all methods should be explicitly implemented.
 
 - lists.vectors   
-                  ACV.Vector overlaid right over the interface.
-                  This composition requires more care to properly connect the pieces, but
-                  makes ACV.Vector methods "magically appear" directly callable, with minimum
-                  of glue code. Only explicitly declared methods need to be implemented,
-                  (via basic, inlined call redirection)
-                  but all ACV.Vector methods become available.
+   ACV.Vector overlaid right over the interface.
+   This composition requires more care to properly connect the pieces, but
+   makes ACV.Vector methods "magically appear" directly callable, with minimum
+   of glue code. Only explicitly declared methods need to be implemented,
+   (via basic, inlined call redirection) but all ACV.Vector methods become available.
 
 
 ## Dependencies
