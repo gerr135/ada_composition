@@ -1,7 +1,9 @@
 --
--- This is a "fixed" implementation, as a straight (discriminated) array, no memory management.
+-- This implementation overlays Ada.Containers.Vectors.Vector right over the interface.
+-- This is a less evident composition, but (with minimal code changes) allows
+-- direct access to all ACV.Vector methods, even those not explicitly declared.
 --
--- Copyright (C) 2018 George Shapovalov <gshapovalov@gmail.com>
+-- Copyright (C) 2018 George SHapovalov <gshapovalov@gmail.com>
 --
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -9,12 +11,14 @@
 -- GNU General Public License for more details.
 --
 
-generic
-package Lists.fixed is
+with Ada.Containers.Vectors;
 
-    type List(Last : Index_Base) is new List_Interface with private;
-    -- Last - last index of array, e.g. 1..2 - last:=2; 4..9 - last:=9;
-    -- first index is Index_Type'First
+generic
+package Lists.Vectors is
+
+    package ACV is new Ada.Containers.Vectors(Index_Type, Element_Type);
+
+    type List is new ACV.Vector and List_Interface with private;
 
     overriding
     function List_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type;
@@ -33,11 +37,7 @@ package Lists.fixed is
 
 private
 
-    type Element_Array is array (Index_Type range <>) of aliased Element_Type;
-
-    type List(Last : Index_Base) is new List_Interface with record
-        data : Element_Array(Index_Type'First .. Last);
-    end record;
+    type List is new ACV.Vector and List_Interface with null record;
 
     function Has_Element (L : List; Position : Index_Base) return Boolean;
 
@@ -60,4 +60,4 @@ private
     function Previous (Object   : Iterator; Position : Cursor) return Cursor;
 
 
-end Lists.fixed;
+end Lists.Vectors;

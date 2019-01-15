@@ -1,6 +1,6 @@
 --
--- a test unit.
--- 
+-- The demo of type hierarchy use: declarations, loops, dereferencing..
+--
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -12,28 +12,30 @@ with Ada.Text_IO, Ada.Integer_Text_IO;
 use Ada.Text_IO;
 
 with Ada.Containers.Vectors;
-with lists.dynamic;
-with lists.fixed;
+with lists.Fixed;
+with lists.Dynamic;
+with lists.Vectors;
 
 procedure Test_list_iface is
 
     type TstType is new Integer;
     package ACV is new Ada.Containers.Vectors(Positive, TstType);
     package PL  is new Lists(Natural, TstType);
-    package PLD is new PL.dynamic;
-    package PLF is new PL.fixed;
-    
+    package PLF is new PL.Fixed;
+    package PLD is new PL.Dynamic;
+    package PLV is new PL.Vectors;
+
     v  : ACV.Vector := ACV.To_Vector(5);
-    ld : PLD.List   := PLD.To_Vector(5);
     lf : PLF.List(5);
+    ld : PLD.List   := PLD.To_Vector(5);
+    lv : PLV.List   := PLV.To_Vector(5);
     lc : PL.List_Interface'Class := PLD.To_Vector(5);
 
-    
+
 begin  -- main
     Put_Line("testing Ada.Containers.Vectors..");
     Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
---         v := v & TstType(i);
         v(i) := TstType(i);
     end loop;
     Put("done;  values: ");
@@ -46,11 +48,28 @@ begin  -- main
     end loop;
     New_Line;
     --
+    --
     New_Line;
-    Put_Line("testing Lists.dynamic ..");
+    Put_Line("testing Lists.Fixed ..");
     Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
---         ld := ld & TstType(i);
+        lf(i) := TstType(i);
+    end loop;
+    Put("done;  values: ");
+    for n of lf loop
+        Put(n'Img);
+    end loop;
+    Put("; now try direct indexing: ");
+    for i in Positive range 1 .. 5 loop
+        Put(TstType'Image(lf(i)));
+    end loop;
+    New_Line;
+    --
+    --
+    New_Line;
+    Put_Line("testing Lists.Dynamic ..");
+    Put("assigning values .. ");
+    for i in Positive range 1 .. 5 loop
         ld(i) := TstType(i);
     end loop;
     Put("done;  values: ");
@@ -63,32 +82,32 @@ begin  -- main
     end loop;
     New_Line;
     --
+    --
     New_Line;
-    Put_Line("testing Lists.fixed ..");
+    Put_Line("testing Lists.Vectors ..");
     Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
---         lf := lf & TstType(i); -- this one is Vectors specific, needs reimplementing &
-        lf(i) := TstType(i);
+        lv(i) := TstType(i);
     end loop;
     Put("done;  values: ");
-    for n of ld loop
+    for n of lv loop
         Put(n'Img);
     end loop;
     Put("; now try direct indexing: ");
     for i in Positive range 1 .. 5 loop
-        Put(TstType'Image(lf(i)));
+        Put(TstType'Image(lv(i)));
     end loop;
     New_Line;
+    --
     --
     New_Line;
     Put_Line("testing List_Interface'Class ..");
     Put("assigning values .. ");
     for i in Positive range 1 .. 5 loop
---         lc := lc & TstType(i); -- as for .fixed, needs declaration at top level
         lc(i) := TstType(i);
     end loop;
     Put("done;  values: ");
-    for n of lc loop -- this is where gnat gets confused
+    for n of lc loop
         Put(n'Img);
     end loop;
     Put("; now try direct indexing: ");
