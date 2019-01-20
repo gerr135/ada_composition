@@ -1,10 +1,10 @@
 with Ada.Text_IO; use Ada.Text_IO;
 
-package base_type is
+package body base_type is
 
-    procedure bt_method(Self : The_Type) is
+    procedure method(Self : The_Type) is
     begin
-        Put_Line("bt:bt_method");
+        Put_Line("      bt:method");
     end;
 
 end base_type;
