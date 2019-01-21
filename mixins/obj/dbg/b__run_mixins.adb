@@ -33,7 +33,7 @@ package body ada_main is
    E114 : Short_Integer; pragma Import (Ada, E114, "base_iface_E");
    E122 : Short_Integer; pragma Import (Ada, E122, "base_type_E");
    E124 : Short_Integer; pragma Import (Ada, E124, "generic_mixin_E");
-   E125 : Short_Integer; pragma Import (Ada, E125, "generic_mixin_compositor_E");
+   E126 : Short_Integer; pragma Import (Ada, E126, "generic_mixin_compositor_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
 
@@ -44,11 +44,11 @@ package body ada_main is
 
    procedure finalize_library is
    begin
+      E126 := E126 - 1;
       declare
          procedure F1;
          pragma Import (Ada, F1, "generic_mixin_compositor__finalize_spec");
       begin
-         E125 := E125 - 1;
          F1;
       end;
       E122 := E122 - 1;
@@ -238,7 +238,8 @@ package body ada_main is
       E122 := E122 + 1;
       E124 := E124 + 1;
       generic_mixin_compositor'elab_spec;
-      E125 := E125 + 1;
+      generic_mixin_compositor'elab_body;
+      E126 := E126 + 1;
    end adainit;
 
    procedure Ada_Main_Program;
@@ -274,13 +275,13 @@ package body ada_main is
    end;
 
 --  BEGIN Object file/option list
-   --   /home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/base_iface.o
-   --   /home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/base_type.o
-   --   /home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/generic_mixin.o
-   --   /home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/generic_mixin_compositor.o
-   --   /home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/run_mixins.o
-   --   -L/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/
-   --   -L/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/
+   --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/base_iface.o
+   --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/base_type.o
+   --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin.o
+   --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin_compositor.o
+   --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/run_mixins.o
+   --   -L/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/
+   --   -L/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/
    --   -L/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.1/adalib/
    --   -static
    --   -lgnat

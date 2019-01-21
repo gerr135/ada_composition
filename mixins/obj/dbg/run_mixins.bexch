@@ -1,21 +1,21 @@
 [GENERATED OBJECT FILE]
 b__run_mixins.o
 [PROJECT FILES]
-/home/gerr/comp/proj/kdevel/ada_composition/mixins/mixins.gpr
-20190118175752
+/home/gerr/comp/kdevel/ada_composition/mixins/mixins.gpr
+20190118135632
 [BOUND OBJECT FILES]
-/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/base_iface.o
-/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/base_type.o
-/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/generic_mixin.o
-/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/generic_mixin_compositor.o
-/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/run_mixins.o
+/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/base_iface.o
+/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/base_type.o
+/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin.o
+/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin_compositor.o
+/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/run_mixins.o
 [GENERATED SOURCE FILES]
 b__run_mixins.ads
 b__run_mixins.adb
 b__run_mixins.ali
 [RESULTING OPTIONS]
--L/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/
--L/home/gerr/comp/proj/kdevel/ada_composition/mixins/obj/dbg/
+-L/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/
+-L/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/
 -L/usr/lib/gcc/x86_64-pc-linux-gnu/7.3.1/adalib/
 -static
 -static-libgcc

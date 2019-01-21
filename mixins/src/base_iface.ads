@@ -12,7 +12,8 @@ package base_iface is
     -- The interface providing mix-in functionality
     type The_Interface is limited interface;
 
-    procedure bare    (Self : The_Interface) is abstract;
-    procedure compound(Self : The_Interface) is abstract;
+    procedure simple        (Self : The_Interface) is abstract;
+    procedure compound      (Self : The_Interface) is abstract;
+    procedure redispatching (Self : The_Interface) is abstract;
 
 end base_iface;

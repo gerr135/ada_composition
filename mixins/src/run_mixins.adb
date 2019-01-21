@@ -34,28 +34,39 @@ begin
         Put_Line("  direct declaration:");
         Put_Line("    mixin:");
         M.method;
-        M.bare;
+        M.simple;
         M.compound;
+        M.redispatching;
         --
         Put_Line("    extension:");
-        E.bare;
+        E.simple;
         E.compound;
+        E.redispatching;
     end;
     declare
-        -- this uses the compositor, hiding generic instantiation but exposing 
+        -- this uses the compositor, hiding generic instantiation but exposing
         -- (logic of) type inheritance (see the corresponding module).
         use generic_mixin_compositor;
         M : Mixin;
         E : Extension;
+        MC : Mixin_Child;
     begin
         Put_Line("  compositor:");
+        Put_Line("    extension:");
+        E.simple;
+        E.compound;
+        E.redispatching;
+        --
         Put_Line("    mixin:");
         M.method;
-        M.bare;
+        M.simple;
         M.compound;
+        M.redispatching;
         --
-        Put_Line("    extension:");
-        E.bare;
-        E.compound;
+        Put_Line("    Mixin_Child:");
+        MC.method;
+        MC.simple;
+        MC.compound;      -- this should output gm:simple
+        MC.redispatching; -- this should output MC:simple
     end;
 end run_mixins;
