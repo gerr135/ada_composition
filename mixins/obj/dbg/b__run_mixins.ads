@@ -37,7 +37,7 @@ package ada_main is
    pragma Export (C, main, "main");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#7431207e#;
+   u00001 : constant Version_32 := 16#d7dddd25#;
    pragma Export (C, u00001, "run_mixinsB");
    u00002 : constant Version_32 := 16#050ff2f0#;
    pragma Export (C, u00002, "system__standard_libraryB");
@@ -277,9 +277,9 @@ package ada_main is
    pragma Export (C, u00119, "system__storage_poolsB");
    u00120 : constant Version_32 := 16#65d872a9#;
    pragma Export (C, u00120, "system__storage_poolsS");
-   u00121 : constant Version_32 := 16#12ce872d#;
+   u00121 : constant Version_32 := 16#3f444167#;
    pragma Export (C, u00121, "base_typeB");
-   u00122 : constant Version_32 := 16#fb051b0c#;
+   u00122 : constant Version_32 := 16#d68fdd46#;
    pragma Export (C, u00122, "base_typeS");
    u00123 : constant Version_32 := 16#13c58064#;
    pragma Export (C, u00123, "generic_mixinB");
@@ -287,16 +287,24 @@ package ada_main is
    pragma Export (C, u00124, "generic_mixinS");
    u00125 : constant Version_32 := 16#eaae6f1c#;
    pragma Export (C, u00125, "generic_mixin_compositorB");
-   u00126 : constant Version_32 := 16#79e79b41#;
+   u00126 : constant Version_32 := 16#546d5d0b#;
    pragma Export (C, u00126, "generic_mixin_compositorS");
-   u00127 : constant Version_32 := 16#fd83e873#;
-   pragma Export (C, u00127, "system__concat_2B");
-   u00128 : constant Version_32 := 16#44953bd4#;
-   pragma Export (C, u00128, "system__concat_2S");
-   u00129 : constant Version_32 := 16#2323a8af#;
-   pragma Export (C, u00129, "system__memoryB");
-   u00130 : constant Version_32 := 16#1f488a30#;
-   pragma Export (C, u00130, "system__memoryS");
+   u00127 : constant Version_32 := 16#c5aa720e#;
+   pragma Export (C, u00127, "oop_mixin_compositorB");
+   u00128 : constant Version_32 := 16#7d551fff#;
+   pragma Export (C, u00128, "oop_mixin_compositorS");
+   u00129 : constant Version_32 := 16#a9bc3703#;
+   pragma Export (C, u00129, "oop_mixinB");
+   u00130 : constant Version_32 := 16#a47e67af#;
+   pragma Export (C, u00130, "oop_mixinS");
+   u00131 : constant Version_32 := 16#fd83e873#;
+   pragma Export (C, u00131, "system__concat_2B");
+   u00132 : constant Version_32 := 16#44953bd4#;
+   pragma Export (C, u00132, "system__concat_2S");
+   u00133 : constant Version_32 := 16#2323a8af#;
+   pragma Export (C, u00133, "system__memoryB");
+   u00134 : constant Version_32 := 16#1f488a30#;
+   pragma Export (C, u00134, "system__memoryS");
 
    --  BEGIN ELABORATION ORDER
    --  ada%s
@@ -428,6 +436,10 @@ package ada_main is
    --  generic_mixin%b
    --  generic_mixin_compositor%s
    --  generic_mixin_compositor%b
+   --  oop_mixin%s
+   --  oop_mixin%b
+   --  oop_mixin_compositor%s
+   --  oop_mixin_compositor%b
    --  run_mixins%b
    --  END ELABORATION ORDER
 

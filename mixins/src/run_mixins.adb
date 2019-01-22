@@ -12,6 +12,7 @@ with base_iface; use base_iface;
 with base_type;  use base_type;
 with generic_mixin;
 with generic_mixin_compositor;
+with oop_mixin_compositor;
 
 procedure run_mixins is
 
@@ -52,6 +53,36 @@ begin
         MC : Mixin_Child;
     begin
         Put_Line("  compositor:");
+        Put_Line("    extension:");
+        E.simple;
+        E.compound;
+        E.redispatching;
+        --
+        Put_Line("    mixin:");
+        M.method;
+        M.simple;
+        M.compound;
+        M.redispatching;
+        --
+        Put_Line("    Mixin_Child:");
+        MC.method;
+        MC.simple;
+        MC.compound;      -- this should output gm:simple
+        MC.redispatching; -- this should output MC:simple
+    end;
+    --
+    Put_Line("non-generic (OOP) mixin");
+    declare
+        -- Only one version is provided in this case.
+        -- Explicit declaration directly here would be impractical and messy.
+        -- The composition is much more clearly illustrated by keeping all the relevant code
+        -- in the separate (compositor) module.
+        use oop_mixin_compositor;
+        M : Mixin;
+        E : Extension;
+        MC : Mixin_Child;
+    begin
+        Put_Line("  compositor (only):");
         Put_Line("    extension:");
         E.simple;
         E.compound;

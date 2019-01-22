@@ -8,6 +8,8 @@ b__run_mixins.o
 /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/base_type.o
 /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin.o
 /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin_compositor.o
+/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/oop_mixin.o
+/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/oop_mixin_compositor.o
 /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/run_mixins.o
 [GENERATED SOURCE FILES]
 b__run_mixins.ads

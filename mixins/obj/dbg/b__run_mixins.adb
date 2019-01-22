@@ -34,6 +34,8 @@ package body ada_main is
    E122 : Short_Integer; pragma Import (Ada, E122, "base_type_E");
    E124 : Short_Integer; pragma Import (Ada, E124, "generic_mixin_E");
    E126 : Short_Integer; pragma Import (Ada, E126, "generic_mixin_compositor_E");
+   E130 : Short_Integer; pragma Import (Ada, E130, "oop_mixin_E");
+   E128 : Short_Integer; pragma Import (Ada, E128, "oop_mixin_compositor_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
 
@@ -44,40 +46,54 @@ package body ada_main is
 
    procedure finalize_library is
    begin
-      E126 := E126 - 1;
+      E128 := E128 - 1;
       declare
          procedure F1;
-         pragma Import (Ada, F1, "generic_mixin_compositor__finalize_spec");
+         pragma Import (Ada, F1, "oop_mixin_compositor__finalize_spec");
       begin
          F1;
       end;
-      E122 := E122 - 1;
+      E130 := E130 - 1;
       declare
          procedure F2;
-         pragma Import (Ada, F2, "base_type__finalize_spec");
+         pragma Import (Ada, F2, "oop_mixin__finalize_spec");
       begin
          F2;
       end;
-      E105 := E105 - 1;
+      E126 := E126 - 1;
       declare
          procedure F3;
-         pragma Import (Ada, F3, "ada__text_io__finalize_spec");
+         pragma Import (Ada, F3, "generic_mixin_compositor__finalize_spec");
       begin
          F3;
       end;
-      E116 := E116 - 1;
+      E122 := E122 - 1;
       declare
          procedure F4;
-         pragma Import (Ada, F4, "system__finalization_masters__finalize_spec");
+         pragma Import (Ada, F4, "base_type__finalize_spec");
       begin
          F4;
       end;
+      E105 := E105 - 1;
       declare
          procedure F5;
-         pragma Import (Ada, F5, "system__file_io__finalize_body");
+         pragma Import (Ada, F5, "ada__text_io__finalize_spec");
+      begin
+         F5;
+      end;
+      E116 := E116 - 1;
+      declare
+         procedure F6;
+         pragma Import (Ada, F6, "system__finalization_masters__finalize_spec");
+      begin
+         F6;
+      end;
+      declare
+         procedure F7;
+         pragma Import (Ada, F7, "system__file_io__finalize_body");
       begin
          E109 := E109 - 1;
-         F5;
+         F7;
       end;
       declare
          procedure Reraise_Library_Exception_If_Any;
@@ -240,6 +256,12 @@ package body ada_main is
       generic_mixin_compositor'elab_spec;
       generic_mixin_compositor'elab_body;
       E126 := E126 + 1;
+      oop_mixin'elab_spec;
+      oop_mixin'elab_body;
+      E130 := E130 + 1;
+      oop_mixin_compositor'elab_spec;
+      oop_mixin_compositor'elab_body;
+      E128 := E128 + 1;
    end adainit;
 
    procedure Ada_Main_Program;
@@ -279,6 +301,8 @@ package body ada_main is
    --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/base_type.o
    --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin.o
    --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/generic_mixin_compositor.o
+   --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/oop_mixin.o
+   --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/oop_mixin_compositor.o
    --   /home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/run_mixins.o
    --   -L/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/
    --   -L/home/gerr/comp/kdevel/ada_composition/mixins/obj/dbg/
