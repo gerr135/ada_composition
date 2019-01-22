@@ -1,0 +1,9 @@
+# Object file
+*.o
+
+# Ada Library Information
+*.ali
+
+# local build dirs and binaries
+obj/*
+run_mixins
