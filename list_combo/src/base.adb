@@ -35,13 +35,67 @@ package body Base is
     end "=";
 
 
-    function set_idx (e : Index) return Base_Fixed5 is
+    function set_idx_fixed (e : Index) return Base_Fixed5 is
     begin
         return BF : Base_Fixed5 do
             for i in Index range 1 .. 5 loop
                 BF.elements(i) := Element_Type(e);
             end loop;
         end return;
-    end set_idx;
+    end set_idx_fixed;
+
+
+    ----------------------------
+    -- Vector
+    
+    overriding procedure print(BD : Base_Dynamic) is
+        N : Index := Index(BD.vec.Length);
+    begin
+        Put("  vector.print,  elements = [");
+        for i in 1 .. N - 1 loop
+            Put(Element_Type'Image(BD.vec(i)) & ", ");
+        end loop;
+        Put_Line(Element_Type'Image(BD.vec(N)) & "];");
+    end print;
+
+
+    function set_idx_dynamic (e : Index) return Base_Dynamic is
+        BD : Base_Dynamic := (vec => ACV.To_Vector(5));
+    begin
+        Put(" set, e=");
+        for i in Index range 1 .. 5 loop
+            Put(i'Img);
+            BD.vec(i) := Element_Type(e);
+        end loop;
+        Put(";");
+        return BD;
+    end set_idx_dynamic;
+
+    ----------------------------
+    -- Vector
+    
+    overriding procedure print (BV : Base_Vector) is
+        N : Index := Index(BV.Length);
+    begin
+        Put("  vector.print,  elements = [");
+        for i in 1 .. N - 1 loop
+            Put(Element_Type'Image(BV(i)) & ", ");
+        end loop;
+        Put_Line(Element_Type'Image(BV(N)) & "];");
+    end print;
+
+
+    function set_idx_vector (e : Index) return Base_Vector is
+        BV : Base_Vector := To_Vector(5);
+    begin
+        Put(" set, e=");
+        for i in Index range 1 .. 5 loop
+            Put(i'Img);
+            BV(i) := Element_Type(e);
+        end loop;
+        Put(";");
+        return BV;
+    end set_idx_vector;
+
 
 end Base;

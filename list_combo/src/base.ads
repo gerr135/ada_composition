@@ -10,6 +10,8 @@
 -- GNU General Public License for more details.
 --
 
+with Ada.Containers.Vectors;
+
 package Base is
 
     type Element_Type is new Integer;
@@ -26,6 +28,8 @@ package Base is
 
     ---------------------------------------
     --  specific types implementing the interface
+    --
+    --  first the "fixed" (more reminiscent of bounded) type
     
     type Base_Fixed(N : Index) is new Base_Interface with record
         elements : Element_Array(1 .. N);
@@ -37,7 +41,24 @@ package Base is
     -- For out fixed list we also need definite type
     -- the easiest way to achieve here is to set fixed size for this demo
     type Base_Fixed5 is new Base_Fixed(5) with null record;
-    function set_idx(e : Index) return Base_Fixed5;
+    function set_idx_fixed(e : Index) return Base_Fixed5;
     -- a basic demo setter/constructor - sets all entries to value of index
+
+    --------------------------------------
+    -- a variant using ACV.Vectors
+    package ACV is new Ada.Containers.Vectors(Index, Element_Type);
+
+    type Base_Dynamic is new Base_Interface with record
+        vec : ACV.Vector;
+    end record;
+    --    
+    overriding procedure print(BD : Base_Dynamic);
+    function set_idx_dynamic(e : Index) return Base_Dynamic;
+
+    
+    type Base_Vector is new ACV.Vector and Base_Interface with null record;
+    --
+    overriding procedure print(BV : Base_Vector);
+    function set_idx_vector(e : Index) return Base_Vector;
     
 end Base;

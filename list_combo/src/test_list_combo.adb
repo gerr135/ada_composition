@@ -20,14 +20,13 @@ with Base; use Base;
 
 procedure Test_list_combo is
 
-    package ACV is new Ada.Containers.Vectors(Base.Index, Base.Base_Fixed5);
-    package PL  is new Lists(Base.Index_Base, Base.Base_Interface);
-    package PLF is new PL.Fixed(Base.Base_Fixed5);
---     package PLD is new PL.Dynamic;
---     package PLV is new PL.Vectors;
+    package ACV is new Ada.Containers.Vectors(Base.Index, Base_Fixed5);
+    package PL  is new Lists(Base.Index_Base, Base_Interface);
+    package PLF is new PL.Fixed(Base_Fixed5);
+    package PLDD is new PL.Dynamic(Base_Dynamic);
+    package PLDV is new PL.Dynamic(Base_Vector);
+    package PLVV is new PL.Vectors(Base_Vector);
 
---     ld : PLD.List   := PLD.To_Vector(5);
---     lv : PLV.List   := PLV.To_Vector(5);
 --     lc : PL.List_Interface'Class := PLD.To_Vector(5);
 
 
@@ -38,7 +37,7 @@ begin  -- main
     begin
         Put("assigning values .. ");
         for i in Base.Index range 1 .. 5 loop
-            v(i) := set_idx(i);
+            v(i) := set_idx_fixed(i);
         end loop;
         Put_Line("done;  values (of-loop): ");
         for item of v loop
@@ -62,7 +61,7 @@ begin  -- main
     begin
         Put("assigning values .. ");
         for i in Base.Index range 1 .. 5 loop
-            lf(i) := Base_Interface'Class(set_idx(i));
+            lf(i) := Base_Interface'Class(set_idx_fixed(i));
         end loop;
         Put_Line("done;  values (of-loop): ");
         for item of lf loop
@@ -78,4 +77,59 @@ begin  -- main
         end loop;
     end;
     New_Line;
+    --
+    New_Line;
+    Put_Line("testing Lists.Dynamic with Base_Dynamic ..");
+    declare
+        use PLDD;
+        ld : PLDD.List   := To_Vector(5);
+    begin
+        Put("assigning values .. ");
+        for i in Base.Index range 1 .. 5 loop
+            New_Line; Put("   i="&i'Img);
+            ld(i) := Base_Interface'Class(set_idx_dynamic(i));
+        end loop;
+        Put_Line("done;  values (of-loop): ");
+        for item of ld loop
+            item.print;
+        end loop;
+        Put_Line("now direct indexing: ");
+        for i in Base.Index range 1 .. 5 loop
+            declare
+                item : Base_Dynamic := Base_Dynamic(ld(i).Data.all);
+            begin
+                item.print;
+            end;
+        end loop;
+    end;
+    New_Line;
+    --
+    New_Line;
+    Put_Line("testing Lists.Dynamic with Base_Vector ..");
+    declare
+        use PLDV;
+        ld : PLDV.List   := To_Vector(5);
+    begin
+        Put("assigning values .. ");
+        for i in Base.Index range 1 .. 5 loop
+            New_Line; Put("   i="&i'Img);
+            ld(i) := Base_Interface'Class(set_idx_vector(i)); -- this assignment of the constructed vector seems to trigger that weird storage errors
+            -- what's more, simply changing whitespace - adding a line-break between New_Line and Put
+            -- changes "heap exhausted" into "stack overflow" error..
+        end loop;
+        Put_Line("done;  values (of-loop): ");
+        for item of ld loop
+            item.print;
+        end loop;
+        Put_Line("now direct indexing: ");
+        for i in Base.Index range 1 .. 5 loop
+            declare
+                item : Base_Vector := Base_Vector(ld(i).Data.all);
+            begin
+                item.print;
+            end;
+        end loop;
+    end;
+    New_Line;
+    --
 end Test_List_combo;
