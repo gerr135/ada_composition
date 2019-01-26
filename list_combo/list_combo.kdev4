@@ -1,0 +1,4 @@
+[Project]
+Name=list_combo
+Manager=KDevCustomMakeManager
+VersionControl=kdevgit

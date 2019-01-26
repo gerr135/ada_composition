@@ -5,5 +5,5 @@
 *.ali
 
 # local build dirs and binaries
-obj/*
+obj/
 run_mixins
