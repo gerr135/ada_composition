@@ -1,35 +1,29 @@
-# List interface
-A demo of iterable and indexabe interface that can be overlayed by an existing container type
+# Elaborate List interface demo
+A demo of iterable and indexabe container hierarchy operating on type tree.
 
 ## About
-This is a demo of how to create an indexabe, iterabel interface, AKA list in many other languages, 
-mirroring the essentials of Ada.Container.Vectors (referenced as ACV below).
-The interface can be implemented in different ways, with three demos 
-provided here. One maps directly onto Ada.Containers.Vectors.Vector (ACV.Vector), 
-another contains ACV.Vector as a record field and last one uses plain array
-(parametrized by discriminants, so it becomes fixed when declared, but requires no memory 
-management). The purpose here is to have a common interface and let the user swap the 
-implementation as needed. Only declarations may need to be changed, but most of 
-(e.g. the class-wide) code could stay the same..
+This is an extension of the list_iface demo, providing a similar indexable/iterabel container 
+type hierarchy (rooted in an interface), but designed to store not a single type passed as 
+a single generic in previous simple example. This variant of container composition allows 
+to store another hierarchy of tagged types.
+
 
 ## Technicalities
-This is based on the Ada gems articles on iterators, <a href="https://www.adacore.com/gems/gem-127-iterators-in-ada-2012-part-1">#127</a>
-and <a href="https://www.adacore.com/gems/gem-128-iterators-in-ada-2012-part-2">#128</a> by AdaCore.
-However this is significantly expanded. First, this demo provides not oonly iteration 
-but also indexing, thus a complete code of A.C.Vectors. Then, and even more essentially,
-the presented interface serves as a root of type hierarchy, with specific implementations 
-being a proper types descendant from it. And finally, one of the implementations overlays
-an existing container type (ACV.Vector) directly over the interface, thus providing a direct
-access to ACV.Vector methods - they "magically appear" directly callable, etc; and without 
-using any extra data fields.
-
-Creating such functional type hierarchy pretty much required reimplementing a lot of
-Ada.Containers internals. This includes creating a parallel type hierarchy for Iterator type.
-In the given example all Iterator functionality could be stored in a single type, perhaps 
-with 1 method overridden. However the whole hierarchy is provided here in order to have
-an easily tunable pattern.
+The bulk of container code is the same as in list_iface demo. Only few changes were made, 
+mostly in the definition of generics. The "private" has been replaced with an "interface", 
+with the idea that an abstract top-level lists package is instantiated with an interface
+that parallels the root type of our stored type hierarchy. Then specific implementations of
+container package are instantiated with specific derived types as needed.  Normally, it 
+should be possible to mix and match - say to use fixed container to store vector-based types,
+or dynamic container to store some other root child. However, at the moment, it seems that 
+the compiler is picky with some combinations. In particular, trying to use data type that 
+is directly derived from ACV.Vector with any container seems to produce weird behavior 
+(run-time STORAGE_ERROR sensitive to white-space - likely triggering some bug in gnat). 
+And trying to combine ACV.Vectropr based data with alike container does not even compiler 
+(while following the same method layout and derivation).
 
 The code layout follows the type inheritance tree:
+(this is a carry-over from list_iface for quick reference)
 - lists     
   contains interface at the root of type hierarchy. 
   This module provides common interface containing essential primitives to be used in universal, 
@@ -56,11 +50,5 @@ The code layout follows the type inheritance tree:
 
 ## Dependencies
 None. Only core Ada features (plus Ada.Containers.Vectors) are used.
-
-## Notes
-One technical nmote: while experimenting with ways to overlay existing type on top of an interface
-and make functional class-wide redispatch during the "of loop" and indexing (which is 
-indirect and relies on a lot of aspects and code unfolding) I managed to trigger a bug in compiler.
-The code that triggers the bug is in a separate branch: gnat_bug
 
 
