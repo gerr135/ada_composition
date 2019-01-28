@@ -1,12 +1,12 @@
 # Type mixins
 A demo of mixing parallel type hierarchies.
 
-## About
+# About
 This is a demo of how to mix independent type hierarchies using interfaces (introduced
 in Ada-2005). This demo presents multiple ways to do such composition: using generics
 and a more common interface/type composition (reminiscent of Java).
 
-## Technicalities
+# Technicalities
 Ada does not have a "full" multiple inheritance, meaning (tagged) types can only have a single
 type as a progenitor. However they can inherit multiple interfaces. This somewhat resembles
 the situation in Java, with an important difference, that interfaces can only have abstract
@@ -14,14 +14,18 @@ or null primitives. Actual code can only be in class-wide methods. Thus derivati
 as straightforward. This demo shows multiple ways to compose a complex type inheriting 
 functionality of multiple progenitors.
 
+1. 
 First method shown is more akin "classic OOP" with one type serving as a specific ancestor 
 and another one attached via encapsulation of its data into a record as an extra entry and
-adding glue code to reroute appropriate calls. **NOTE: only the primitives of the __"proper"__,
-that is direct, ancestor can be properly overridden.** Redispatching is tag-based and there 
+adding glue code to reroute appropriate calls. **NOTE: only the primitives of the __"proper"__
+(that is direct) ancestor can be properly overridden.** Redispatching is tag-based and there 
 is essentially one "main line of tag inheritance that is taken into account; that of the 
 "proper ancestor". The encapsulated "extra" data is not counted for inheritance, as tag 
-belongs to the recrd itself.
+belongs to the recrod itself. This can be overcome by using the class-wide methods starting 
+at the interface level. Passing a class-wide parameter preserves the tag ans allows 
+proper dispatching, as illsutrated in the code (see the class-wide method).
 
+2. 
 Another method is to make use of generics - to pass a mixed-in type as a generic parameter. 
 This allows to have proper inheritance even on the mixed-in type, with redispatching (casting 
 to class-wide) methods calling a proper inherited primitive. Additionally generics can help 

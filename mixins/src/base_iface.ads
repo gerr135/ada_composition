@@ -15,5 +15,7 @@ package base_iface is
     procedure simple        (Self : The_Interface) is abstract;
     procedure compound      (Self : The_Interface) is abstract;
     procedure redispatching (Self : The_Interface) is abstract;
+    
+    procedure class_wide    (Self : The_Interface'Class);
 
 end base_iface;

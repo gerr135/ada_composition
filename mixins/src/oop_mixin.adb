@@ -5,20 +5,20 @@ package body oop_mixin is
     overriding
     procedure simple(Self : Derived) is
     begin
-        Put_Line("      mn:simple");
+        Put_Line("      oop:simple");
     end;
 
     overriding
     procedure compound(Self : Derived) is
     begin
-        Put_Line("      mn:compound, calling Derived.simple");
+        Put_Line("      oop:compound, calling Derived.simple");
         Self.simple;
     end;
 
     overriding
     procedure redispatching(Self : Derived) is
     begin
-        Put_Line("      mn:compound, calling Derived'Class.simple");
+        Put_Line("      oop:redispatching, calling Derived'Class.simple");
         Derived'Class(Self).simple;
     end;
 

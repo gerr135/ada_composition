@@ -63,12 +63,14 @@ begin
         M.simple;
         M.compound;
         M.redispatching;
+        M.class_wide;
         --
         Put_Line("    Mixin_Child:");
         MC.method;
         MC.simple;
         MC.compound;      -- this should output gm:simple
         MC.redispatching; -- this should output MC:simple
+        MC.class_wide;
     end;
     --
     Put_Line("non-generic (OOP) mixin");
@@ -93,11 +95,13 @@ begin
         M.simple;
         M.compound;
         M.redispatching;
+        M.class_wide;
         --
         Put_Line("    Mixin_Child:");
         MC.method;
         MC.simple;
         MC.compound;      -- this should output gm:simple
-        MC.redispatching; -- this should output MC:simple
+        MC.redispatching; -- this outputs gm:simple
+        MC.class_wide;    -- this outputs MC:simple
     end;
 end run_mixins;
