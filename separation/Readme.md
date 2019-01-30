@@ -17,11 +17,11 @@ to provide data storage and access. In the most trivial case we can simply have 
 with class-wide methods implementing the algorithms and a few derived types hodling the data.
 However the more interesting cases would have multiple interfaces providing various data
 processing detail depending on the abstraction. E.g. a simple "top level"  interface can
-notionally deal with simle collections of entries, cycling through them one by one,
+notionally deal with simple collections of entries, cycling through them one by one,
 while an "optimized interface" would build matrices and do some linear algebra, possibly
 invoking Blast or related optimized libraries. Tying this algorithmic hierarchy of interfaces
 to a largely independent tree or hierarchy of data storage types may be not completely trivial
-without code duplication. This demo tries to provide simple enough examples of non-trivial
+without code duplication. This demo tries to provide simple enough layout of non-trivial
 use of such constructs.
 
 On the demo specifics: it would be interesting indeed to use some convoluted calculation
@@ -32,6 +32,8 @@ After all the major point of these demos is data abstraction and type compositio
 So, instead, we will do some trivial manipulation that does not really require optimization.
 But we will mimick the more complex situation nonetheless by requiring derived optimized
 algorithmic interface to have access to additional data.
+
+One note on inheritance/overridability of the code. As interfaces in Ada can only have abstract or null primitives, all the common algorithmic code is done in class-wide methods. However these are just "regular procedures" for all intents and purposes. They cannot be inherited or overridden. It is, however, often useful to have the possibility to have that code a part of common interface - to use it in a uniform way or to be able to override the action. This demo illustrates how this can be achieved with minor amount of glue code (lower parts of the modules, dealing with Unrelated_Interface/Type).
 
 
 ## Dependencies
