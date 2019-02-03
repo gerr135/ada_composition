@@ -7,6 +7,9 @@ This is a collection of code examples demonstrating how to do some non-trivial t
 ## Contents
 Each individual demo is in its own directory with a corresponding Readme providing a specific description.
 - [list_iface](list_iface/) Iterable and indexabe interface that can be overlayed by an existing container type
+- [list_combo](list_combo/) An evolution of **list_iface**. An iterable and indexable container that stores type hierarchy (and not just a single type).
+- [mixins](mixins/)  A demo of how to mix separate type hierarchies, with some caases supporting inheritance and redispatch on both branches.
+- [separation](separation/) A demo of how to separate algorithic part of the project (code-only in interfaces) from data storage and representation (data-storing type hierarchy).
 
 ## Licensing
 All the code here is under non-restrictive license (basically AS-IS clause with copyright. For the moment this is BSD licence, but this can be changed if some other better license is suggested). It is intended to be copied and modified by anybody if there is any need.
