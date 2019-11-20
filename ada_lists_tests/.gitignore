@@ -1,0 +1,7 @@
+# Object and Ada Library Information files
+*.o
+*.ali
+
+# generated binaries
+test_*
+!test_*.ad?

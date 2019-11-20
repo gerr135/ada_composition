@@ -1,0 +1,4 @@
+[Project]
+Name=ada_lists_tests
+Manager=KDevCustomMakeManager
+VersionControl=kdevgit
