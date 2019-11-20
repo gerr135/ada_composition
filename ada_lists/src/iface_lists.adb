@@ -1,6 +1,6 @@
 -- with Ada.Text_IO; use Ada.Text_IO;
 
-package body Lists is
+package body Iface_Lists is
 
     function Has_Element (Position : Cursor) return Boolean is
         -- Ada's stock ACV checks for Position = No_Element here, 
@@ -13,4 +13,4 @@ package body Lists is
         return Position.Container.Has_Element(Position.Index);
     end Has_Element;
     
-end Lists;
+end Iface_Lists;

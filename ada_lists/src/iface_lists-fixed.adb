@@ -1,4 +1,4 @@
-package body Lists.fixed is
+package body Iface_Lists.fixed is
 
     overriding
     function List_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type is
@@ -72,4 +72,4 @@ package body Lists.fixed is
         return C;
     end;
 
-end Lists.fixed;
+end Iface_Lists.fixed;

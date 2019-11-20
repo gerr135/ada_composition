@@ -11,7 +11,7 @@
 
 generic
     type Element_Type is new Element_Interface with private;
-package Lists.fixed is
+package Iface_Lists.fixed is
 
     type List(Last : Index_Base) is new List_Interface with private;
     -- Last - last index of array, e.g. 1..2 - last:=2; 4..9 - last:=9;
@@ -61,4 +61,4 @@ private
     function Previous (Object   : Iterator; Position : Cursor) return Cursor;
 
 
-end Lists.fixed;
+end Iface_Lists.fixed;

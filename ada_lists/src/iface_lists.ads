@@ -18,7 +18,7 @@ with Ada.Iterator_Interfaces;
 generic
     type Index_Base is range <>; -- pass an "extended" index_base (e.g. starting from 0 and counting from 1)
     type Element_Interface is interface;
-package Lists is
+package Iface_Lists is
 
     subtype Index_Type is Index_Base range Index_Base'First + 1 .. Index_Base'Last;
     -- mirrors the common subtype definition. Should be the same as defined likewise anywhere else..
@@ -89,4 +89,4 @@ private
 
     type Reference_Type (Data : not null access Element_Interface'Class) is null record;
 
-end Lists;
+end Iface_Lists;

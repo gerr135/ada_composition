@@ -1,7 +1,7 @@
 --
--- This implementation encapsulates Ada.Containers.Vectors.Vector as a record entry.
--- This is a common way to compose enveloping type, requiring glue code to implement all
--- declared methods. SImple to understand, but only explicitly declared methods are available.
+-- This implementation overlays Ada.Containers.Vectors.Vector right over the interface.
+-- This is a less evident composition, but (with minimal code changes) allows
+-- direct access to all ACV.Vector methods, even those not explicitly declared.
 --
 -- Copyright (C) 2018 George SHapovalov <gshapovalov@gmail.com>
 --
@@ -15,9 +15,11 @@ with Ada.Containers.Vectors;
 
 generic
     type Element_Type is new Element_Interface with private;
-package Lists.dynamic is
+package Iface_Lists.Vectors is
 
-    type List is new List_Interface with private;
+    package ACV is new Ada.Containers.Vectors(Index_Type, Element_Type);
+
+    type List is new ACV.Vector and List_Interface with private;
 
     overriding
     function List_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type;
@@ -34,16 +36,9 @@ package Lists.dynamic is
     overriding
     function Iterate (Container : in List) return Iterator_Interface'Class;
 
-    -- new methods from ACV.Vector pool; should really be part of interface, here is only a demo of tying all together..
-    function To_Vector (Length : Index_Type) return List;
-
 private
 
-    package ACV is new Ada.Containers.Vectors(Index_Type, Element_Type);
-
-    type List is new List_Interface with record
-        vec : ACV.Vector;
-    end record;
+    type List is new ACV.Vector and List_Interface with null record;
 
     function Has_Element (L : List; Position : Index_Base) return Boolean;
 
@@ -66,4 +61,4 @@ private
     function Previous (Object   : Iterator; Position : Cursor) return Cursor;
 
 
-end Lists.dynamic;
+end Iface_Lists.Vectors;
