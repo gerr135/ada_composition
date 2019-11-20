@@ -4,7 +4,7 @@ library project ada_lists is
 
     for Library_Name use "ada_lists";
     for Library_Kind use "dynamic";
-    for Library_Version use "ada_lists.so." & Version;
+    for Library_Version use "libada_lists.so." &  Version;
 
     for Library_Dir  use "lib";
     for Source_Dirs use ("src");
