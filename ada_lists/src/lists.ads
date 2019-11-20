@@ -25,9 +25,9 @@ package Lists is
 
     type List_Interface is interface
         with Constant_Indexing => List_Constant_Reference,
-            Variable_Indexing => List_Reference,
-            Default_Iterator  => Iterate,
-            Iterator_Element  => Element_Type;
+             Variable_Indexing => List_Reference,
+             Default_Iterator  => Iterate,
+             Iterator_Element  => Element_Type;
 
     type Cursor is private;
     No_Element : constant Cursor;
