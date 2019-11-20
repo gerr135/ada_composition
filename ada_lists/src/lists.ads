@@ -16,7 +16,7 @@
 with Ada.Iterator_Interfaces;
 
 generic
-    type Index_Base is range <>; -- pass an "extended" indes_base (e.g. starting from 0 and counting from 1)
+    type Index_Base is range <>; -- pass an "extended" index_base (e.g. starting from 0 and counting from 1)
     type Element_Interface is interface;
 package Lists is
 
