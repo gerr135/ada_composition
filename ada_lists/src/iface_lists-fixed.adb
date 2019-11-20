@@ -6,14 +6,14 @@ package body Iface_Lists.fixed is
     begin
         return CR;
     end;
- 
+
     overriding
     function List_Constant_Reference (Container : aliased in List; Index : in Index_Type) return Constant_Reference_Type is
         CR : Constant_Reference_Type(Container.data(Index)'Access);
     begin
         return CR;
     end;
- 
+
     overriding
     function List_Reference (Container : aliased in out List; Position  : Cursor) return Reference_Type is
         R : Reference_Type(Container.data(Position.Index)'Access);
@@ -51,25 +51,46 @@ package body Iface_Lists.fixed is
         return C;
     end;
 
-    overriding 
+    overriding
     function Last  (Object : Iterator) return Cursor is
         C : Cursor := (Object.Container, List(Object.Container.all).Last);
     begin
         return C;
     end;
 
-    overriding 
+    overriding
     function Next (Object   : Iterator; Position : Cursor) return Cursor is
         C : Cursor := (Object.Container, Position.Index + 1);
     begin
         return C;
     end;
 
-    overriding 
+    overriding
     function Previous (Object   : Iterator; Position : Cursor) return Cursor is
         C : Cursor := (Object.Container, Position.Index - 1);
     begin
         return C;
     end;
+
+
+    ----  Extras --
+    overriding
+    function NElements  (Container : aliased in out List) return Index_Base is
+    begin
+        return Container.data'Length;
+    end;
+
+    overriding
+    function First_Index(Container : aliased in out List) return Index_Type is
+    begin
+        return Container.data'First;
+    end;
+
+    overriding
+    function Last_Index (Container : aliased in out List) return Index_Type is
+    begin
+        return Container.data'Last;
+    end;
+
 
 end Iface_Lists.fixed;

@@ -47,7 +47,7 @@ package body Base is
 
     ----------------------------
     -- Vector
-    
+
     overriding procedure print(BD : Base_Dynamic) is
         N : Index := Index(BD.vec.Length);
     begin
@@ -73,7 +73,7 @@ package body Base is
 
     ----------------------------
     -- Vector
-    
+
     overriding procedure print (BV : Base_Vector) is
         N : Index := Index(BV.Length);
     begin
@@ -94,7 +94,7 @@ package body Base is
             BV(i) := Element_Type(e);
         end loop;
         Put(";");
-        return BV;
+        return BV;  -- looks like this is triggerring that infinite allocation cycle in gnat
     end set_idx_vector;
 
 

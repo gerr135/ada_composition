@@ -39,6 +39,9 @@ begin  -- main
         for i in Base.Index range 1 .. 5 loop
             v(i) := set_idx_fixed(i);
         end loop;
+        Put_Line("done;");
+        Put("   indices: First =" & v.First_Index'img & ", Last =" & v.Last_Index'img);
+        Put_Line(", Length =" & v.Length'img);
         Put_Line("done;  values (of-loop): ");
         for item of v loop
             item.print;
@@ -63,6 +66,9 @@ begin  -- main
         for i in Base.Index range 1 .. 5 loop
             lf(i) := Base_Interface'Class(set_idx_fixed(i));
         end loop;
+        Put_Line("done;");
+        Put("   indices: First =" & lf.First_Index'img & ", Last =" & lf.Last_Index'img);
+        Put_Line(", Length =" & lf.NElements'img);
         Put_Line("done;  values (of-loop): ");
         for item of lf loop
             item.print;
@@ -89,6 +95,10 @@ begin  -- main
             New_Line; Put("   i="&i'Img);
             ld(i) := Base_Interface'Class(set_idx_dynamic(i));
         end loop;
+        New_Line;
+        Put_Line("done;");
+        Put("   indices: First =" & ld.First_Index'img & ", Last =" & ld.Last_Index'img);
+        Put_Line(", Length =" & ld.NElements'img);
         Put_Line("done;  values (of-loop): ");
         for item of ld loop
             item.print;
@@ -117,6 +127,10 @@ begin  -- main
             -- what's more, simply changing whitespace - adding a line-break between New_Line and Put
             -- changes "heap exhausted" into "stack overflow" error..
         end loop;
+        New_Line;
+        Put_Line("done;");
+        Put("   indices: First =" & ld.First_Index'img & ", Last =" & ld.Last_Index'img);
+        Put_Line(", Length =" & ld.NElements'img);
         Put_Line("done;  values (of-loop): ");
         for item of ld loop
             item.print;

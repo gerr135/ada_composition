@@ -34,6 +34,18 @@ package Iface_Lists.dynamic is
     overriding
     function Iterate (Container : in List) return Iterator_Interface'Class;
 
+
+    ---- Extras --
+    overriding
+    function NElements  (Container : aliased in out List) return Index_Base;
+
+    overriding
+    function First_Index(Container : aliased in out List) return Index_Type;
+
+    overriding
+    function Last_Index (Container : aliased in out List) return Index_Type;
+
+
     -- new methods from ACV.Vector pool; should really be part of interface, here is only a demo of tying all together..
     function To_Vector (Length : Index_Type) return List;
 

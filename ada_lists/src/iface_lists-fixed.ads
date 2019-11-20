@@ -32,6 +32,18 @@ package Iface_Lists.fixed is
     overriding
     function Iterate (Container : in List) return Iterator_Interface'Class;
 
+
+    ---- Extras --
+    overriding
+    function NElements  (Container : aliased in out List) return Index_Base;
+
+    overriding
+    function First_Index(Container : aliased in out List) return Index_Type;
+
+    overriding
+    function Last_Index (Container : aliased in out List) return Index_Type;
+
+
 private
 
     type Element_Array is array (Index_Type range <>) of aliased Element_Type;
