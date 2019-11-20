@@ -60,7 +60,7 @@ begin  -- main
     end loop;
     Put_Line("done;");
     Put("   indices: First =" & lf.First_Index'img & ", Last =" & lf.Last_Index'img);
-    Put_Line(", Length =" & lf.NElements'img);
+    Put_Line(", Length =" & lf.Length'img);
     Put("   values, the 'of loop': ");
     for n of lf loop
         Put(n'Img);
@@ -80,7 +80,7 @@ begin  -- main
     end loop;
     Put_Line("done;");
     Put("   indices: First =" & ld.First_Index'img & ", Last =" & ld.Last_Index'img);
-    Put_Line(", Length =" & ld.NElements'img);
+    Put_Line(", Length =" & ld.Length'img);
     Put("   values, the 'of loop': ");
     for n of ld loop
         Put(n'Img);
@@ -100,7 +100,7 @@ begin  -- main
     end loop;
     Put_Line("done;");
     Put("   indices: First =" & lv.First_Index'img & ", Last =" & lv.Last_Index'img);
-    Put_Line(", Length =" & lv.NElements'img);
+    Put_Line(", Length =" & Positive'Image(lv.Length));
     Put("   values, the 'of loop': ");
     for n of lv loop
         Put(n'Img);
@@ -120,7 +120,7 @@ begin  -- main
     end loop;
     Put_Line("done;");
     Put("   indices: First =" & lc.First_Index'img & ", Last =" & lc.Last_Index'img);
-    Put_Line(", Length =" & lc.NElements'img);
+    Put_Line(", Length =" & lc.Length'img);
     Put("   values, the 'of loop': ");
     for n of lc loop
         Put(n'Img);

@@ -68,7 +68,7 @@ begin  -- main
         end loop;
         Put_Line("done;");
         Put("   indices: First =" & lf.First_Index'img & ", Last =" & lf.Last_Index'img);
-        Put_Line(", Length =" & lf.NElements'img);
+        Put_Line(", Length =" & lf.Length'img);
         Put_Line("done;  values (of-loop): ");
         for item of lf loop
             item.print;
@@ -98,7 +98,7 @@ begin  -- main
         New_Line;
         Put_Line("done;");
         Put("   indices: First =" & ld.First_Index'img & ", Last =" & ld.Last_Index'img);
-        Put_Line(", Length =" & ld.NElements'img);
+        Put_Line(", Length =" & ld.Length'img);
         Put_Line("done;  values (of-loop): ");
         for item of ld loop
             item.print;
@@ -130,7 +130,7 @@ begin  -- main
         New_Line;
         Put_Line("done;");
         Put("   indices: First =" & ld.First_Index'img & ", Last =" & ld.Last_Index'img);
-        Put_Line(", Length =" & ld.NElements'img);
+        Put_Line(", Length =" & ld.Length'img);
         Put_Line("done;  values (of-loop): ");
         for item of ld loop
             item.print;

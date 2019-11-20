@@ -75,7 +75,7 @@ package body Lists.fixed is
 
     ----  Extras --
     overriding
-    function NElements  (Container : aliased in out List) return Index_Base is
+    function Length (Container : aliased in out List) return Index_Base is
     begin
         return Container.data'Length;
     end;

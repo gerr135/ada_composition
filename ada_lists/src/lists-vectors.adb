@@ -84,9 +84,9 @@ package body Lists.Vectors is
 
     ---- Extras --
     overriding
-    function NElements  (Container : aliased in out List) return Index_Base is
+    function Length (Container : aliased in out List) return Index_Base is
     begin
-        return Index_Base(Container.Length);
+        return Index_Base(ACV.Vector(Container).Length);
     end;
 
     overriding
@@ -98,7 +98,7 @@ package body Lists.Vectors is
     overriding
     function Last_Index (Container : aliased in out List) return Index_Type is
     begin
-        return Index_Type'First + Index_Base(Container.Length);
+        return Index_Type'First + Index_Base(ACV.Vector(Container).Length);
     end;
 
 end Lists.Vectors;

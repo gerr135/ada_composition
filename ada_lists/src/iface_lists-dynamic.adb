@@ -78,7 +78,7 @@ package body Iface_Lists.dynamic is
 
 
     overriding
-    function NElements  (Container : aliased in out List) return Index_Base is
+    function Length (Container : aliased in out List) return Index_Base is
     begin
         return Index_Base(Container.vec.Length);
     end;

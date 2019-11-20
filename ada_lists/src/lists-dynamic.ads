@@ -36,7 +36,7 @@ package Lists.dynamic is
 
     ---- Extras --
     overriding
-    function NElements  (Container : aliased in out List) return Index_Base;
+    function Length (Container : aliased in out List) return Index_Base;
 
     overriding
     function First_Index(Container : aliased in out List) return Index_Type;

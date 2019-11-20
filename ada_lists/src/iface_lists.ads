@@ -77,7 +77,7 @@ package Iface_Lists is
     ------------------------------------------------
     -- Extras (to the basic indexing/iteration)
 
-    function NElements  (Container : aliased in out List_Interface) return Index_Base is abstract;
+    function Length (Container : aliased in out List_Interface) return Index_Base is abstract;
     function First_Index(Container : aliased in out List_Interface) return Index_Type is abstract;
     function Last_Index (Container : aliased in out List_Interface) return Index_Type is abstract;
 
