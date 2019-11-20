@@ -1,12 +1,12 @@
 --
 -- A barebones indexed interface which can be iterated over.
 -- Child packages will either pass through to core (fixed) array or a Vector;
--- 
--- The idea is to create an interface that will allow multiple implementations but can be 
+--
+-- The idea is to create an interface that will allow multiple implementations but can be
 -- used directly in implementing common (class-wide) functionality.
 --
 -- Copyright (C) 2018  <copyright holder> <email>
--- 
+--
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -16,13 +16,13 @@
 with Ada.Iterator_Interfaces;
 
 generic
-    type Index_Base is range <>; -- pass an "extended" indes_base (e.g. starting from 0 and counting from 1)
+    type Index_Base is range <>; -- pass an "extended" index_base (e.g. starting from 0 and counting from 1)
     type Element_Type is private;
 package Lists is
 
     subtype Index_Type is Index_Base range Index_Base'First + 1 .. Index_Base'Last;
     -- mirrors the common subtype definition. Should be the same as defined likewise anywhere else..
-    
+
     type List_Interface is interface
         with Constant_Indexing => List_Constant_Reference,
             Variable_Indexing => List_Reference,
@@ -42,10 +42,10 @@ package Lists is
 
     type Constant_Reference_Type (Data : not null access constant Element_Type) is private
         with Implicit_Dereference => Data;
-        
+
     type Reference_Type (Data : not null access Element_Type) is private
         with Implicit_Dereference => Data;
-        
+
     function List_Constant_Reference (Container : aliased in List_Interface; Position  : Cursor) return Constant_Reference_Type is abstract;
     function List_Constant_Reference (Container : aliased in List_Interface; Index : Index_Type) return Constant_Reference_Type is abstract;
 
@@ -60,9 +60,9 @@ package Lists is
     --
     -- we need to define our iterator type in a central way.
     -- Since implementation details may differe, we essentially get a parallel type hierarchy here..
-    
+
     type Iterator_Interface is interface and List_Iterator_Interfaces.Reversible_Iterator;
-    -- all 4 primitives (First, Last, Next, Prev) would be abstract here anyway, 
+    -- all 4 primitives (First, Last, Next, Prev) would be abstract here anyway,
     -- so they are implicitly carried over
     --
     -- NOTE: in this (trivial) case 3 out of 4 primitives have exactly the same implementation,
