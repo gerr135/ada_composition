@@ -73,6 +73,15 @@ package Lists is
     function Iterate (Container : List_Interface) return Iterator_Interface'Class is abstract;
     -- this one can (and should) share the name/specs, as it is not part of any aspect..
 
+
+    ------------------------------------------------
+    -- Extras (to the basic indexing/iteration)
+
+    function NElements  (Container : aliased in out List_Interface) return Index_Base is abstract;
+    function First_Index(Container : aliased in out List_Interface) return Index_Type is abstract;
+    function Last_Index (Container : aliased in out List_Interface) return Index_Type is abstract;
+
+
 private
 
     type List_Access is access all List_Interface'Class;

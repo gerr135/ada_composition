@@ -72,4 +72,25 @@ package body Lists.fixed is
         return C;
     end;
 
+
+    ----  Extras --
+    overriding
+    function NElements  (Container : aliased in out List) return Index_Base is
+    begin
+        return Container.data'Length;
+    end;
+
+    overriding
+    function First_Index(Container : aliased in out List) return Index_Type is
+    begin
+        return Container.data'First;
+    end;
+
+    overriding
+    function Last_Index (Container : aliased in out List) return Index_Type is
+    begin
+        return Container.data'Last;
+    end;
+
+
 end Lists.fixed;
