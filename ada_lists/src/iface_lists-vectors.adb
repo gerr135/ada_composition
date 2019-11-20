@@ -98,7 +98,7 @@ package body Iface_Lists.Vectors is
     overriding
     function Last_Index (Container : aliased in out List) return Index_Type is
     begin
-        return Index_Type'First + Index_Base(ACV.Vector(Container).Length);
+        return Index_Type'First + Index_Base(ACV.Vector(Container).Length) - 1;
     end;
 
 
