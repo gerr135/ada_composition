@@ -1,0 +1,6 @@
+# Object and Ada Library Information files
+*.o
+*.ali
+
+# tess(s) from demo version
+test_list_combo
