@@ -20,16 +20,16 @@ package Iface_Lists.dynamic is
     type List is new List_Interface with private;
 
     overriding
-    function List_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type;
+    function Element_Constant_Reference (Container : aliased in List; Position  : Cursor) return Constant_Reference_Type;
 
     overriding
-    function List_Constant_Reference (Container : aliased in List; Index : Index_Type) return Constant_Reference_Type;
+    function Element_Constant_Reference (Container : aliased in List; Index : Index_Type) return Constant_Reference_Type;
 
     overriding
-    function List_Reference (Container : aliased in out List; Position  : Cursor) return Reference_Type;
+    function Element_Reference (Container : aliased in out List; Position  : Cursor) return Reference_Type;
 
     overriding
-    function List_Reference (Container : aliased in out List; Index : Index_Type) return Reference_Type;
+    function Element_Reference (Container : aliased in out List; Index : Index_Type) return Reference_Type;
 
     overriding
     function Iterate (Container : in List) return Iterator_Interface'Class;

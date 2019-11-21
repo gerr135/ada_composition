@@ -24,8 +24,8 @@ package Lists is
     -- mirrors the common subtype definition. Should be the same as defined likewise anywhere else..
 
     type List_Interface is interface
-        with Constant_Indexing => List_Constant_Reference,
-             Variable_Indexing => List_Reference,
+        with Constant_Indexing => Element_Constant_Reference,
+             Variable_Indexing => Element_Reference,
              Default_Iterator  => Iterate,
              Iterator_Element  => Element_Type;
 
@@ -46,11 +46,11 @@ package Lists is
     type Reference_Type (Data : not null access Element_Type) is private
         with Implicit_Dereference => Data;
 
-    function List_Constant_Reference (Container : aliased in List_Interface; Position  : Cursor) return Constant_Reference_Type is abstract;
-    function List_Constant_Reference (Container : aliased in List_Interface; Index : Index_Type) return Constant_Reference_Type is abstract;
+    function Element_Constant_Reference (Container : aliased in List_Interface; Position  : Cursor) return Constant_Reference_Type is abstract;
+    function Element_Constant_Reference (Container : aliased in List_Interface; Index : Index_Type) return Constant_Reference_Type is abstract;
 
-    function List_Reference (Container : aliased in out List_Interface; Position  : Cursor) return Reference_Type is abstract;
-    function List_Reference (Container : aliased in out List_Interface; Index : Index_Type) return Reference_Type is abstract;
+    function Element_Reference (Container : aliased in out List_Interface; Position  : Cursor) return Reference_Type is abstract;
+    function Element_Reference (Container : aliased in out List_Interface; Index : Index_Type) return Reference_Type is abstract;
     -- these names have to be different from what is used (in private part) by Ada.Containers.Vectors
     -- if we are to directly glue ACV.Vector over this,
     -- otherwise the compiler gets confused..
