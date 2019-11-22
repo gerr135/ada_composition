@@ -7,7 +7,8 @@ project ada_lists_tests is
    for Source_Dirs use ("src");
    for Object_Dir use "obj/" & external ("mode", "dbg");
    for Exec_Dir use ".";
-   for Main use ("test_list_iface.adb", "test_list_combo.adb");  --   <<<<
+   for Main use ("test_list_iface.adb", "test_list_iface_wrec.adb",
+                 "test_list_combo.adb");  --   <<<<
 
    type Mode_Type is ("dbg", "release");         -- all possible values
    Mode : Mode_Type := external ("mode", "dbg"); -- a typed variable

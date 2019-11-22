@@ -17,7 +17,7 @@ with lists.Bounded;
 with lists.Dynamic;
 with lists.Vectors;
 
-procedure Test_list_iface is
+procedure Test_list_iface_wrec is
 
     type Element_Type is new Integer;
 
@@ -32,22 +32,25 @@ procedure Test_list_iface is
 begin  -- main
     Put_Line("testing Ada.Containers.Vectors..");
     declare
-        v  : ACV.Vector := ACV.To_Vector(5);
+        type VRec is record
+            f  : ACV.Vector;
+        end record;
+        v : VRec := (f => ACV.To_Vector(5));
     begin
         Put("assigning values .. ");
         for i in Integer range 1 .. 5 loop
-            v(i) := Element_Type(i);
+            v.f(i) := Element_Type(i);
         end loop;
         Put_Line("done;");
-        Put("   indices: First =" & v.First_Index'img & ", Last =" & v.Last_Index'img);
-        Put_Line(", Length =" & v.Length'img);
+        Put("   indices: First =" & v.f.First_Index'img & ", Last =" & v.f.Last_Index'img);
+        Put_Line(", Length =" & v.f.Length'img);
         Put("   values, the 'of loop': ");
-        for n of v loop
+        for n of v.f loop
             Put(n'Img);
         end loop;
         Put("; direct indexing: ");
         for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(v(i)));
+            Put(Element_Type'Image(v.f(i)));
         end loop;
     end;
     New_Line;
@@ -56,22 +59,25 @@ begin  -- main
     New_Line;
     Put_Line("testing Lists.Fixed..");
     declare
-        lf : PLF.List(5);
+        type FRec (N : Positive) is record
+            f  : PLF.List(N);
+        end record;
+        lf : FRec(5);
     begin
         Put("assigning values .. ");
         for i in Integer range 1 .. 5 loop
-            lf(i) := Element_Type(i);
+            lf.f(i) := Element_Type(i);
         end loop;
         Put_Line("done;");
-        Put("   indices: First =" & lf.First_Index'img & ", Last =" & lf.Last_Index'img);
-        Put_Line(", Length =" & lf.Length'img);
+        Put("   indices: First =" & lf.f.First_Index'img & ", Last =" & lf.f.Last_Index'img);
+        Put_Line(", Length =" & lf.f.Length'img);
         Put("   values, the 'of loop': ");
-        for n of lf loop
+        for n of lf.f loop
             Put(n'Img);
         end loop;
         Put("; direct indexing: ");
         for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(lf(i)));
+            Put(Element_Type'Image(lf.f(i)));
         end loop;
     end;
     New_Line;
@@ -171,4 +177,4 @@ begin  -- main
         end loop;
     end;
     New_Line;
-end Test_List_iface;
+end Test_list_iface_wrec;
