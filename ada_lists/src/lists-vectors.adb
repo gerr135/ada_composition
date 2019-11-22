@@ -82,7 +82,7 @@ package body Lists.Vectors is
     end;
 
 
-    ---- Extras --
+    ---- conversion glue to  reroute calls to ACV.Vector methods
     overriding
     function Length (Container : aliased in out List) return Index_Base is
     begin

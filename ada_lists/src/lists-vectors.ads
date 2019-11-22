@@ -36,6 +36,8 @@ package Lists.Vectors is
     function Iterate (Container : in List) return Iterator_Interface'Class;
 
 
+    --  These (below) are present in AC.Vectors, but are masked by new definition in Lists.ads
+    --  so, we have to add some conversion glue to pass the calls..
     overriding
     function Length (Container : aliased in out List) return Index_Base;
 
