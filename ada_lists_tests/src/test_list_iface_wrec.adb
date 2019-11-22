@@ -86,22 +86,25 @@ begin  -- main
     New_Line;
     Put_Line("testing Lists.Bounded..");
     declare
-        lb : PLB.List(5);
+        type BRec (N : Positive) is record
+            f  : PLB.List(N);
+        end record;
+        lb : BRec(5);
     begin
         Put("assigning values .. ");
         for i in Integer range 1 .. 5 loop
-            lb(i) := Element_Type(i);
+            lb.f(i) := Element_Type(i);
         end loop;
         Put_Line("done;");
-        Put("   indices: First =" & lb.First_Index'img & ", Last =" & lb.Last_Index'img);
-        Put_Line(", Length =" & lb.Length'img);
+        Put("   indices: First =" & lb.f.First_Index'img & ", Last =" & lb.f.Last_Index'img);
+        Put_Line(", Length =" & lb.f.Length'img);
         Put("   values, the 'of loop': ");
-        for n of lb loop
+        for n of lb.f loop
             Put(n'Img);
         end loop;
         Put("; direct indexing: ");
         for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(lb(i)));
+            Put(Element_Type'Image(lb.f(i)));
         end loop;
     end;
     New_Line;
