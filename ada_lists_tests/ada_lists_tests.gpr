@@ -1,4 +1,4 @@
-with "/home/gerr/comp/kdevel/ada/ada_composition/ada_lists/ada_lists.gpr";
+with "../ada_lists/ada_lists.gpr";
 
 project ada_lists_tests is
 	-- supports debug (default) or release modes
