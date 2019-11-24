@@ -113,22 +113,25 @@ begin  -- main
     New_Line;
     Put_Line("testing Lists.Dynamic..");
     declare
-        ld : PLD.List   := PLD.To_Vector(5);
+        type DRec is record
+            f : PLD.List;
+        end record;
+        ld : DRec := (f => PLD.To_Vector(5));
     begin
         Put("assigning values .. ");
         for i in Integer range 1 .. 5 loop
-            ld(i) := Element_Type(i);
+            ld.f(i) := Element_Type(i);
         end loop;
         Put_Line("done;");
-        Put("   indices: First =" & ld.First_Index'img & ", Last =" & ld.Last_Index'img);
-        Put_Line(", Length =" & ld.Length'img);
+        Put("   indices: First =" & ld.f.First_Index'img & ", Last =" & ld.f.Last_Index'img);
+        Put_Line(", Length =" & ld.f.Length'img);
         Put("   values, the 'of loop': ");
-        for n of ld loop
+        for n of ld.f loop
             Put(n'Img);
         end loop;
         Put("; direct indexing: ");
         for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(ld(i)));
+            Put(Element_Type'Image(ld.f(i)));
         end loop;
     end;
     New_Line;
@@ -137,22 +140,25 @@ begin  -- main
     New_Line;
     Put_Line("testing Lists.Vectors ..");
     declare
-        lv : PLV.List   := PLV.To_Vector(5);
+        type VRec is record
+            f : PLV.List;
+        end record;
+        lv : VRec := (f => PLD.To_Vector(5));
     begin
         Put("assigning values .. ");
         for i in Integer range 1 .. 5 loop
-            lv(i) := Element_Type(i);
+            lv.f(i) := Element_Type(i);
         end loop;
         Put_Line("done;");
-        Put("   indices: First =" & lv.First_Index'img & ", Last =" & lv.Last_Index'img);
-        Put_Line(", Length =" & Ada.Containers.Count_Type'Image(lv.Length)); -- apparently ACV.Vector methods are not masked enough here..
+        Put("   indices: First =" & lv.f.First_Index'img & ", Last =" & lv.f.Last_Index'img);
+        Put_Line(", Length =" & Ada.Containers.Count_Type'Image(lv.f.Length)); -- apparently ACV.Vector methods are not masked enough here..
         Put("   values, the 'of loop': ");
-        for n of lv loop
+        for n of lv.f loop
             Put(n'Img);
         end loop;
         Put("; direct indexing: ");
         for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(lv(i)));
+            Put(Element_Type'Image(lv.f(i)));
         end loop;
     end;
     New_Line;
@@ -161,22 +167,25 @@ begin  -- main
     New_Line;
     Put_Line("testing List_Interface'Class ..");
     declare
-        lc : PL.List_Interface'Class := PLD.To_Vector(5);
+        type CRec is record
+            f : PL.List_Interface'Class;  -- very likely will not build, even if gnat is fixed to process above
+        end record;
+        lc : CRec := (f => PLD.To_Vector(5));
     begin
         Put("assigning values .. ");
         for i in Integer range 1 .. 5 loop
-            lc(i) := Element_Type(i);
+            lc.f(i) := Element_Type(i);
         end loop;
         Put_Line("done;");
-        Put("   indices: First =" & lc.First_Index'img & ", Last =" & lc.Last_Index'img);
-        Put_Line(", Length =" & lc.Length'img);
+        Put("   indices: First =" & lc.f.First_Index'img & ", Last =" & lc.f.Last_Index'img);
+        Put_Line(", Length =" & lc.f.Length'img);
         Put("   values, the 'of loop': ");
-        for n of lc loop
+        for n of lc.f loop
             Put(n'Img);
         end loop;
         Put("; direct indexing: ");
         for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(lc(i)));
+            Put(Element_Type'Image(lc.f(i)));
         end loop;
     end;
     New_Line;
