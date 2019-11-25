@@ -56,31 +56,31 @@ begin  -- main
     New_Line;
     --
     --
-    New_Line;
-    Put_Line("testing Lists.Fixed..");
-    declare
-        type FRec (N : Positive) is record
-            f  : PLF.List(N);
-        end record;
-        lf : FRec(5);
-    begin
-        Put("assigning values .. ");
-        for i in Integer range 1 .. 5 loop
-            lf.f(i) := Element_Type(i);
-        end loop;
-        Put_Line("done;");
-        Put("   indices: First =" & lf.f.First_Index'img & ", Last =" & lf.f.Last_Index'img);
-        Put_Line(", Length =" & lf.f.Length'img);
-        Put("   values, the 'of loop': ");
-        for n of lf.f loop
-            Put(n'Img);
-        end loop;
-        Put("; direct indexing: ");
-        for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(lf.f(i)));
-        end loop;
-    end;
-    New_Line;
+--     New_Line;
+--     Put_Line("testing Lists.Fixed..");
+--     declare
+--         type FRec (N : Positive) is record
+--             f  : PLF.List(N);
+--         end record;
+--         lf : FRec(5);
+--     begin
+--         Put("assigning values .. ");
+--         for i in Integer range 1 .. 5 loop
+--             lf.f(i) := Element_Type(i);
+--         end loop;
+--         Put_Line("done;");
+--         Put("   indices: First =" & lf.f.First_Index'img & ", Last =" & lf.f.Last_Index'img);
+--         Put_Line(", Length =" & lf.f.Length'img);
+--         Put("   values, the 'of loop': ");
+--         for n of lf.f loop
+--             Put(n'Img);
+--         end loop;
+--         Put("; direct indexing: ");
+--         for i in Positive range 1 .. 5 loop
+--             Put(Element_Type'Image(lf.f(i)));
+--         end loop;
+--     end;
+--     New_Line;
     --
     --
 --     New_Line;
@@ -164,33 +164,33 @@ begin  -- main
     New_Line;
     --
     --
-    New_Line;
-    Put_Line("testing List_Interface'Class ..");
-    declare
-        -- we cannot have indeterminate ('Class) type as a "primitive" record field,
-        -- we have to pass some info as a discriminant, and via Access.
-        -- Need to figure out the way to use it here that actually makes utilitary sense.
-        -- May not be very useful with untagged Element_Type..
-        type CRec (f : access PL.List_Interface'Class) is null record;
-        lc : CRec (f => PLD.To_Vector(5)'Access); -- what to pass here??
-        -- May try to use Reference_Type, but that is already entering that interface based
-        -- type hierarchy of iface_lists..
-    begin
-        Put("assigning values .. ");
-        for i in Integer range 1 .. 5 loop
-            lc.f(i) := Element_Type(i);
-        end loop;
-        Put_Line("done;");
-        Put("   indices: First =" & lc.f.First_Index'img & ", Last =" & lc.f.Last_Index'img);
-        Put_Line(", Length =" & lc.f.Length'img);
-        Put("   values, the 'of loop': ");
-        for n of lc.f loop
-            Put(n'Img);
-        end loop;
-        Put("; direct indexing: ");
-        for i in Positive range 1 .. 5 loop
-            Put(Element_Type'Image(lc.f(i)));
-        end loop;
-    end;
-    New_Line;
+--     New_Line;
+--     Put_Line("testing List_Interface'Class ..");
+--     declare
+--         -- we cannot have indeterminate ('Class) type as a "primitive" record field,
+--         -- we have to pass some info as a discriminant, and via Access.
+--         -- Need to figure out the way to use it here that actually makes utilitary sense.
+--         -- May not be very useful with untagged Element_Type..
+--         type CRec (f : access PL.List_Interface'Class) is null record;
+--         lc : CRec (f => PLD.To_Vector(5)'Access); -- what to pass here??
+--         -- May try to use Reference_Type, but that is already entering that interface based
+--         -- type hierarchy of iface_lists..
+--     begin
+--         Put("assigning values .. ");
+--         for i in Integer range 1 .. 5 loop
+--             lc.f(i) := Element_Type(i);
+--         end loop;
+--         Put_Line("done;");
+--         Put("   indices: First =" & lc.f.First_Index'img & ", Last =" & lc.f.Last_Index'img);
+--         Put_Line(", Length =" & lc.f.Length'img);
+--         Put("   values, the 'of loop': ");
+--         for n of lc.f loop
+--             Put(n'Img);
+--         end loop;
+--         Put("; direct indexing: ");
+--         for i in Positive range 1 .. 5 loop
+--             Put(Element_Type'Image(lc.f(i)));
+--         end loop;
+--     end;
+--     New_Line;
 end Test_list_iface_wrec;
