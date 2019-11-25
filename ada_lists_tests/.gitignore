@@ -5,3 +5,5 @@
 # generated binaries
 test_*
 !test_*.ad?
+
+bug01
